@@ -16,7 +16,7 @@ import se.arole.datalayer.entity.User;
 //@TestExecutionListeners(listeners= DependencyInjectionTestExecutionListener.class)
 public class ServiceImpTest {
 
-	@Autowired
+//	@Autowired
 	UserServiceImp userService;
 	
 //	@Test

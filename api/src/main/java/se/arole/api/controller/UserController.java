@@ -2,6 +2,7 @@ package se.arole.api.controller;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,10 @@ import se.arole.api.resource.UserVO;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.service.UserService;
 
-@Controller
+//@Controller
 public final class UserController {
 
-	@Autowired
+//	@Autowired
 	private UserService userService;
 
 	public UserController(UserService userService) {
@@ -25,7 +26,9 @@ public final class UserController {
 	}
 
 	public Collection<UserVO> getAll() {
-		return Collections.emptyList();
+		List<User> all = (List<User>) userService.getAll();
+		List<UserVO> fromDbUserList = UserAdapter.fromDbUserList(all);
+		return fromDbUserList;
 	}
 
 	public UserVO create(UserVO user) {
