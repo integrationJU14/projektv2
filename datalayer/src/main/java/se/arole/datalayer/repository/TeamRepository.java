@@ -2,8 +2,8 @@ package se.arole.datalayer.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import se.arole.datalayer.entity.Team;
+import se.arole.datalayer.entity.TeamJPA;
 
-public interface TeamRepository extends PagingAndSortingRepository<Team, Long> {
-	Team findByTeamId(Integer teamId);
+public interface TeamRepository extends PagingAndSortingRepository<TeamJPA, Long> {
+	TeamJPA findByTeamId(Integer teamId);
 }

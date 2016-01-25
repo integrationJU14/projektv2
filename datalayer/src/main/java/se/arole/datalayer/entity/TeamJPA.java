@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Team {
+public class TeamJPA {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -23,18 +23,18 @@ public class Team {
 	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	private List <User> users;
 
-	public Team() {
+	public TeamJPA() {
 
 	}
 
-	public Team(String name, Integer teamId) {
+	public TeamJPA(String name, Integer teamId) {
 		super();
 		this.name = name;
 		this.teamId = teamId;
 
 	}
 
-	public Team(String name, Integer teamId, List<User> users) {
+	public TeamJPA(String name, Integer teamId, List<User> users) {
 		super();
 		this.name = name;
 		this.teamId = teamId;

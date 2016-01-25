@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se.arole.datalayer.entity.Team;
+import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.repository.IssueRepository;
 import se.arole.datalayer.repository.TeamRepository;
@@ -21,14 +21,14 @@ public class TeamServiceImpl implements TeamService {
 	private TeamRepository teamRepository;
 
 	@Override
-	public Team createTeam(Team team) {
+	public TeamJPA createTeam(TeamJPA team) {
 
 		return teamRepository.save(team);
 	}
 
 	@Override
-	public Team updateTeam(Team team, int teamId) {
-		Team teamToUpdate = teamRepository.findByTeamId(teamId);
+	public TeamJPA updateTeam(TeamJPA team, int teamId) {
+		TeamJPA teamToUpdate = teamRepository.findByTeamId(teamId);
 		teamToUpdate.setName(team.getName());
 		teamToUpdate.setTeamId(team.getTeamId());
 		teamToUpdate.setUsers(team.getUsers());
@@ -37,16 +37,16 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<Team> getAllTeams() {
+	public List<TeamJPA> getAllTeams() {
 
-		return (List<Team>) teamRepository.findAll();
+		return (List<TeamJPA>) teamRepository.findAll();
 	}
 
 	@Override
 	public void addUserToTeam(User user, int teamId) {
 		List<User> users;
 
-		Team team = teamRepository.findByTeamId(teamId);
+		TeamJPA team = teamRepository.findByTeamId(teamId);
 
 		if (team.getUsers() != null)
 			users = team.getUsers();

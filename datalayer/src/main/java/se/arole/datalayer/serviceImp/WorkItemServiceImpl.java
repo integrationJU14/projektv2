@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.arole.datalayer.entity.Status;
-import se.arole.datalayer.entity.Team;
+import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.entity.WorkItem;
 import se.arole.datalayer.repository.WorkItemRepository;
@@ -45,7 +45,7 @@ public class WorkItemServiceImpl implements WorkItemService {
 		return repository.findBySolver(user);
 	}
 
-	public List<WorkItem> workItemsByTeam(Team team) {
+	public List<WorkItem> workItemsByTeam(TeamJPA team) {
 		List<WorkItem> workItems = new ArrayList<>();
 
 		for (User user : team.getUsers()) {
