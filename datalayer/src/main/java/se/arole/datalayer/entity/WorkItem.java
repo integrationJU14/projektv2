@@ -1,6 +1,7 @@
 package se.arole.datalayer.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,6 +38,15 @@ public class WorkItem implements Serializable{
 		this.description = description;
 		this.status = status;
 	}
+	
+	public WorkItem(Integer itemId, String description, String status, User solver, List<Issue> issue) {
+		super();
+		this.itemId = itemId;
+		this.description = description;
+		this.status = status;
+		this.solver = solver;
+		this.issue = issue;
+	}
 	public Integer getItemId() {
 		return itemId;
 	}
@@ -62,7 +72,7 @@ public class WorkItem implements Serializable{
 		this.solver = solver;
 	}
 	public List<Issue> getIssue() {
-		return issue;
+		return new ArrayList<Issue>(issue);
 	}
 	public void setIssue(List<Issue> issue) {
 		this.issue = issue;
