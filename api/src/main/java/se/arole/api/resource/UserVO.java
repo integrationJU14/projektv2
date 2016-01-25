@@ -4,12 +4,12 @@ import java.util.List;
 
 public class UserVO {
 	
-	long userId; 
+	Integer userId; 
 	boolean isActive;
 	String userName, firstName, lastName;
 	List<WorkItemVO> assignedWorkItems;
 	
-	public UserVO(long userId, boolean isActive, String userName, String firstName, String lastName){
+	public UserVO(Integer userId, boolean isActive, String userName, String firstName, String lastName){
 		this.userId = userId;
 		this.isActive = isActive;
 		this.userName = userName;
@@ -22,7 +22,7 @@ public class UserVO {
 		return userId;
 	}
 
-	public UserVO setUserId(long userId) {
+	public UserVO setUserId(Integer userId) {
 		this.userId = userId;
 		
 		return this;
