@@ -61,6 +61,12 @@ public class WorkItem implements Serializable{
 	public void setSolver(User solver) {
 		this.solver = solver;
 	}
+	public List<Issue> getIssue() {
+		return issue;
+	}
+	public void setIssue(List<Issue> issue) {
+		this.issue = issue;
+	}
 	
 	
 	

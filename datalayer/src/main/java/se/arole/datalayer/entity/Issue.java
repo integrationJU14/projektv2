@@ -17,7 +17,7 @@ public class Issue implements Serializable {
 	private Long id;
 	@Column(unique=true)
 	Integer issueId;
-	String message;
+	String description, header;
 	boolean isSolved;
 	@ManyToOne
     @JoinColumn(name = "fk_workItem_id")
@@ -27,10 +27,11 @@ public class Issue implements Serializable {
 
 	}
 
-	public Issue(Integer issueId,String message, boolean isSolved) {
+	public Issue(Integer issueId, String description, String header, boolean isSolved) {
 		super();
 		this.issueId = issueId;
-		this.message=message;
+		this.description=description;
+		this.header=header;
 		this.isSolved = isSolved;
 	}
 
@@ -50,12 +51,12 @@ public class Issue implements Serializable {
 		this.isSolved = isSolved;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setDescription(String message) {
+		this.description = message;
 	}
 
 	public WorkItem getWorkItem() {
@@ -64,6 +65,15 @@ public class Issue implements Serializable {
 
 	public void setWorkItem(WorkItem workItem) {
 		this.workItem = workItem;
+	}
+
+	public String getHeader() {
+		// TODO Auto-generated method stub
+		return header;
+	}
+	
+	public void setHeader(String header) {
+		this.header = header;
 	}
 
 }

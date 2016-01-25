@@ -29,7 +29,8 @@ public class IssueServiceImpl implements IssueService {
 
 		Issue issueToUpdate = issueRepository.findByIssueId(issueId);
 	
-			issueToUpdate.setMessage(issue.getMessage());
+			issueToUpdate.setDescription(issue.getDescription());
+			issueToUpdate.setHeader(issue.getHeader());
 			issueToUpdate.setSolved(issue.isSolved());
 
 			issueRepository.save(issueToUpdate);
