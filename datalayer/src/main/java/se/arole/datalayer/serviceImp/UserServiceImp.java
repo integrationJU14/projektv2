@@ -1,5 +1,8 @@
 package se.arole.datalayer.serviceImp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +18,17 @@ import se.arole.datalayer.service.UserService;
  */
 @Service
 public class UserServiceImp implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	public UserServiceImp(UserRepository userRepository){
+
+	public UserServiceImp(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
-	public UserServiceImp() {}
-	
+
+	public UserServiceImp() {
+	}
+
 	@Override
 	public User createUser(User user) {
 		return userRepository.save(user);
@@ -42,8 +46,8 @@ public class UserServiceImp implements UserService {
 	public void changeStatusUser(boolean isActive, Integer userId) {
 		User tempUser = userRepository.findByUserId(userId);
 		userRepository.delete(tempUser.getId());
-		userRepository.save(new User(tempUser.getName(),tempUser.getUserId(), isActive));
-		
+		userRepository.save(new User(tempUser.getName(), tempUser.getUserId(), isActive));
+
 	}
 
 	@Override
@@ -55,6 +59,14 @@ public class UserServiceImp implements UserService {
 	public User getUserByUsername(String userName) {
 		List<User> users = (List<User>) userRepository.findAll();
 		return users.stream().filter(user -> user.getName().contains(userName)).findFirst().orElse(null);
+	}
+
+	@Override
+	public Collection<User> getAll() {
+		Iterable<User> findAll = userRepository.findAll();
+		Collection<User> users = new ArrayList<>();
+		findAll.forEach(u -> users.add(u));
+		return users;
 	}
 
 }

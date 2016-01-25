@@ -11,16 +11,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import se.arole.datalayer.config.Config;
-import se.arole.datalayer.config.Services;
 import se.arole.datalayer.entity.User;
 
 /**
  * @author Holstad
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { Config.class })
-@TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = { Config.class })
+//@TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
+@Ignore
 public class UserServiceImpTest {
 
 	private User user;

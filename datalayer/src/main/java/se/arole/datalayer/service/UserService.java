@@ -1,5 +1,7 @@
 package se.arole.datalayer.service;
 
+import java.util.Collection;
+
 import se.arole.datalayer.entity.User;
 
 public interface UserService {
@@ -9,6 +11,7 @@ public interface UserService {
 	void changeStatusUser (boolean isActive, Integer userId);
 	User getUser (Integer userId);
 	User getUserByUsername (String userName);
+	Collection<User> getAll();
 	
 
 }
