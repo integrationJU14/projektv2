@@ -21,7 +21,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.google.gson.JsonObject;
 
 import se.arole.api.controller.IssueController;
-import se.arole.api.resource.IssueVO;
+import se.arole.api.resource.Issue;
 import se.arole.webapi.config.Config;
 
 @Path("issue")
@@ -46,15 +46,15 @@ public final class IssueResource {
 
 	@GET
 	public Response getAll() {
-		Collection<IssueVO> all = issueController.getAll();
-		GenericEntity<Collection<IssueVO>> result = new GenericEntity<Collection<IssueVO>>(all) {
+		Collection<Issue> all = issueController.getAll();
+		GenericEntity<Collection<Issue>> result = new GenericEntity<Collection<Issue>>(all) {
 		};
 		return Response.ok(result).build();
 	}
 
 	@POST
-	public Response createIssue(IssueVO Issue) {
-		IssueVO createdIssue = issueController.create(Issue);
+	public Response createIssue(Issue Issue) {
+		Issue createdIssue = issueController.create(Issue);
 		URI location = uriInfo.getAbsolutePathBuilder().path("" + createdIssue.getIssueId()).build();
 
 		
@@ -64,10 +64,10 @@ public final class IssueResource {
 	//
 	//// @PUT
 	//// @Path("{id}")
-	//// public Response updateIssue(@PathParam("id") Integer id, IssueVO Issue) {
+	//// public Response updateIssue(@PathParam("id") Integer id, Issue Issue) {
 	////
 	//// IssueController.getIssue(id);
-	//// IssueVO updatedIssue = IssueController.update(id, Issue);
+	//// Issue updatedIssue = IssueController.update(id, Issue);
 	////
 	//// return Response.ok(updatedIssue).build();
 	//// }
@@ -75,7 +75,7 @@ public final class IssueResource {
 	@GET
 	@Path("{id}")
 	public Response getIssue(@PathParam("id") Integer id) {
-		IssueVO Issue = issueController.getIssue(id);
+		Issue Issue = issueController.getIssue(id);
 
 		return Response.ok(Issue).build();
 	}
@@ -83,7 +83,7 @@ public final class IssueResource {
 	// @GET
 	// @QueryParam("{IssueName}")
 	// public Response getIssue(@QueryParam("IssueName") String IssueName) {
-	// IssueVO Issue = IssueController.getIssue(IssueName);
+	// Issue Issue = IssueController.getIssue(IssueName);
 	// // TODO: POssibility to add a mapper for an exception if no customer is
 	// // found
 	// return Response.ok(Issue).build();

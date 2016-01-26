@@ -7,7 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import se.arole.api.resource.IssueVO;
+import se.arole.api.resource.Issue;
 import se.arole.api.resource.UserVO;
 import se.arole.api.resource.WorkItem;
 
@@ -58,12 +58,12 @@ public class JsonObjectMapper {
 
 	}
 
-	private JsonElement issueToJason(IssueVO issueVO) {
+	public JsonElement issueToJason(Issue issue) {
 		JsonObject jsonIssue = new JsonObject();
-		jsonIssue.addProperty("issueId", issueVO.getIssueId());
-		jsonIssue.addProperty("description", issueVO.getDescription());
-		jsonIssue.addProperty("header", issueVO.getHeader());
-		jsonIssue.addProperty("isSolved", issueVO.isSolved());
+		jsonIssue.addProperty("issueId", issue.getIssueId());
+		jsonIssue.addProperty("description", issue.getDescription());
+		jsonIssue.addProperty("header", issue.getHeader());
+		jsonIssue.addProperty("isSolved", issue.isSolved());
 
 		return jsonIssue;
 	}
@@ -75,7 +75,7 @@ public class JsonObjectMapper {
 		String description = workItemJson.get("description").getAsString();
 		String header = workItemJson.get("header").getAsString();
 		List<UserVO> usersVO = new ArrayList<>();
-		List<IssueVO> assignedIssues = new ArrayList<>();
+		List<Issue> assignedIssues = new ArrayList<>();
 		UserVO assignedUser = jasonToUser(workItemJson.get("assignedUser"));
 
 		JsonArray usersJson = workItemJson.get("users").getAsJsonArray();
@@ -94,7 +94,7 @@ public class JsonObjectMapper {
 
 	}
 
-	public IssueVO jasonToIssue(JsonElement e) {
+	public Issue jasonToIssue(JsonElement e) {
 		
 		JsonObject issueJson = e.getAsJsonObject();
 		int issueId = issueJson.get("issueId").getAsInt();
@@ -103,6 +103,6 @@ public class JsonObjectMapper {
 
 		boolean isSolved = issueJson.get("isSolved").getAsBoolean();
 
-		return new IssueVO(issueId, description, header, isSolved);
+		return new Issue(issueId, description, header, isSolved);
 	}
 }

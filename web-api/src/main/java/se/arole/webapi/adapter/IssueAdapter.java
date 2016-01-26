@@ -10,15 +10,15 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.arole.api.resource.IssueVO;
+import se.arole.api.resource.Issue;
 
-public final class IssueAdapter implements JsonSerializer<IssueVO>, JsonDeserializer<IssueVO> {
+public final class IssueAdapter implements JsonSerializer<Issue>, JsonDeserializer<Issue> {
 
 	JsonObjectMapper jsonMapper;
 	
 	// JsonSerializer
 	@Override
-	public JsonElement serialize(IssueVO issue, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(Issue issue, Type typeOfSrc, JsonSerializationContext context) {
 
 		return jsonMapper.issueToJason(issue);
 		 
@@ -26,7 +26,7 @@ public final class IssueAdapter implements JsonSerializer<IssueVO>, JsonDeserial
 
 	// JsonDeserializer
 	@Override
-	public IssueVO deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+	public Issue deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
 		return jsonMapper.jasonToIssue(json);
 		
