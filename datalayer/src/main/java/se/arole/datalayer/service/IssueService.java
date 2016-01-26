@@ -2,7 +2,7 @@ package se.arole.datalayer.service;
 
 import java.util.List;
 import se.arole.datalayer.entity.Issue;
-import se.arole.datalayer.entity.WorkItem;
+import se.arole.datalayer.entity.WorkItemJPA;
 
 public interface IssueService {
 
@@ -10,8 +10,8 @@ public interface IssueService {
 
 	Issue updateIssue(Issue issue, int issueId);
 
-	List<WorkItem> workItemsWithIssues();
+	List<WorkItemJPA> workItemsWithIssues();
 
-	void addIssueToWorkItem(WorkItem workItem, Issue issue);
+	void addIssueToWorkItem(WorkItemJPA workItemJPA, Issue issue);
 
 }

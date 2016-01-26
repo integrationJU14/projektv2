@@ -22,23 +22,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonWriter;
 
-import se.arole.api.resource.WorkItemVO;
+import se.arole.api.resource.WorkItem;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public final class WorkItemMapper implements MessageBodyReader<WorkItemVO>, MessageBodyWriter<WorkItemVO> {
+public final class WorkItemMapper implements MessageBodyReader<WorkItem>, MessageBodyWriter<WorkItem> {
 
-	private static final Gson gson = new GsonBuilder().registerTypeAdapter(WorkItemVO.class, new WorkItemAdapter()).create();
+	private static final Gson gson = new GsonBuilder().registerTypeAdapter(WorkItem.class, new WorkItemAdapter()).create();
 
 	// MessageBodyReader
 	@Override
 	public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-		return type.isAssignableFrom(WorkItemVO.class);
+		return type.isAssignableFrom(WorkItem.class);
 	}
 
 	@Override
-	public WorkItemVO readFrom(Class<WorkItemVO> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
+	public WorkItem readFrom(Class<WorkItem> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders,
 	                     InputStream in) throws IOException, WebApplicationException {
 		return gson.fromJson(new InputStreamReader(in), type);
 	}
@@ -46,20 +46,20 @@ public final class WorkItemMapper implements MessageBodyReader<WorkItemVO>, Mess
 	// MessageBodyWriter
 	@Override
 	public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-		return type.isAssignableFrom(WorkItemVO.class);
+		return type.isAssignableFrom(WorkItem.class);
 	}
 
 	@Override
-	public long getSize(WorkItemVO t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+	public long getSize(WorkItem t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		return 0;
 	}
 
 	@Override
-	public void writeTo(WorkItemVO workItemVO, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders,
+	public void writeTo(WorkItem workItem, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders,
 	                    OutputStream out) throws IOException, WebApplicationException {
 
 		try (JsonWriter writer = new JsonWriter(new OutputStreamWriter(out))) {
-			gson.toJson(workItemVO, WorkItemVO.class, writer);
+			gson.toJson(workItem, WorkItem.class, writer);
 		}
 	}
 }

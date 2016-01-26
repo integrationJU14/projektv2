@@ -21,7 +21,7 @@ public class Issue implements Serializable {
 	boolean isSolved;
 	@ManyToOne
     @JoinColumn(name = "fk_workItem_id")
-	WorkItem workItem;
+	WorkItemJPA workItemJPA;
 
 	public Issue() {
 
@@ -59,12 +59,12 @@ public class Issue implements Serializable {
 		this.description = message;
 	}
 
-	public WorkItem getWorkItem() {
-		return workItem;
+	public WorkItemJPA getWorkItem() {
+		return workItemJPA;
 	}
 
-	public void setWorkItem(WorkItem workItem) {
-		this.workItem = workItem;
+	public void setWorkItem(WorkItemJPA workItemJPA) {
+		this.workItemJPA = workItemJPA;
 	}
 
 	public String getHeader() {

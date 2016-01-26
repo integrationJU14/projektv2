@@ -9,24 +9,24 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.arole.api.resource.WorkItemVO;
+import se.arole.api.resource.WorkItem;
 
 
 public final class WorkItemAdapter 
-implements JsonSerializer<WorkItemVO>, JsonDeserializer<WorkItemVO> {
+implements JsonSerializer<WorkItem>, JsonDeserializer<WorkItem> {
 	
 	JsonObjectMapper mapper;
 
 	// JsonSerializer
 	@Override
-	public JsonElement serialize(WorkItemVO workItemVO, Type typeOfSrc, JsonSerializationContext context) {
-		return	mapper.workItemVOToJson(workItemVO);	
+	public JsonElement serialize(WorkItem workItem, Type typeOfSrc, JsonSerializationContext context) {
+		return	mapper.workItemVOToJson(workItem);	
 		 
 	}
 
 	// JsonDeserializer
 	@Override
-	public WorkItemVO deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+	public WorkItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
 		return mapper.jsonToWorkItemVO(json);
