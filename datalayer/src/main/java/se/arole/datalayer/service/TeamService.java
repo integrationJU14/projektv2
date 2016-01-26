@@ -14,5 +14,7 @@ public interface TeamService {
 	List<TeamJPA> getAllTeams();
 
 	void addUserToTeam(User user, int teamId);
+	
+	TeamJPA getTeam(int teamId);
 
 }

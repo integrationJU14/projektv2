@@ -8,15 +8,12 @@ import org.springframework.stereotype.Service;
 
 import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.User;
-import se.arole.datalayer.repository.IssueRepository;
 import se.arole.datalayer.repository.TeamRepository;
-import se.arole.datalayer.repository.WorkItemRepository;
 import se.arole.datalayer.service.TeamService;
 
 @Service
 public class TeamServiceImpl implements TeamService {
 
-	
 	@Autowired
 	private TeamRepository teamRepository;
 
@@ -32,7 +29,7 @@ public class TeamServiceImpl implements TeamService {
 		teamToUpdate.setName(team.getName());
 		teamToUpdate.setTeamId(team.getTeamId());
 		teamToUpdate.setUsers(team.getUsers());
-		
+
 		return teamRepository.save(teamToUpdate);
 	}
 
@@ -57,6 +54,11 @@ public class TeamServiceImpl implements TeamService {
 		team.setUsers(users);
 		teamRepository.save(team);
 
+	}
+
+	@Override
+	public TeamJPA getTeam(int teamId) {
+		return teamRepository.findByTeamId(teamId);
 	}
 
 }

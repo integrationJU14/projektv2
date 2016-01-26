@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,24 +17,21 @@ public class TeamJPA {
 	private Long id;
 	@Column
 	private String name;
-	@Column(unique =true)
+	@Column(unique = true)
 	private Integer teamId;
-	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-	private List <User> users;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<User> users;
 
 	public TeamJPA() {
 
 	}
 
 	public TeamJPA(String name, Integer teamId) {
-		super();
 		this.name = name;
 		this.teamId = teamId;
-
 	}
 
 	public TeamJPA(String name, Integer teamId, List<User> users) {
-		super();
 		this.name = name;
 		this.teamId = teamId;
 		this.users = users;
@@ -64,5 +60,5 @@ public class TeamJPA {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+
 }

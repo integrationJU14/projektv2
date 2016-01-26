@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Team {
 	
-	Integer teamId;
-	String teamName;
-	List<UserVO> teamUsers;
+	private Integer teamId;
+	private String teamName;
+	private List<UserVO> teamUsers;
 	
 	public Team(Integer teamId, String teamName) {
 		this.teamId = teamId;
