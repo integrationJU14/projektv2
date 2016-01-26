@@ -2,7 +2,7 @@ package se.arole.api.resource;
 
 import java.util.List;
 
-public class WorkItemVO {
+public class WorkItem {
 	
 	int workItemId;
 	String description, header;
@@ -10,7 +10,7 @@ public class WorkItemVO {
 	List<IssueVO> assignedIssues;
 	UserVO assignedUser;
 	
-	public WorkItemVO(Integer workItemId, String decsription, String header, UserVO assignedUser, List<UserVO> users, List<IssueVO> issues){
+	public WorkItem(Integer workItemId, String decsription, String header, UserVO assignedUser, List<UserVO> users, List<IssueVO> issues){
 		this.workItemId = workItemId;
 		this.description = decsription;
 		this.header = header;
