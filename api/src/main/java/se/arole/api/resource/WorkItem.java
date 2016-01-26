@@ -7,10 +7,10 @@ public class WorkItem {
 	int workItemId;
 	String description, header;
 	List<UserVO> users;
-	List<IssueVO> assignedIssues;
+	List<Issue> assignedIssues;
 	UserVO assignedUser;
 	
-	public WorkItem(Integer workItemId, String decsription, String header, UserVO assignedUser, List<UserVO> users, List<IssueVO> issues){
+	public WorkItem(Integer workItemId, String decsription, String header, UserVO assignedUser, List<UserVO> users, List<Issue> issues){
 		this.workItemId = workItemId;
 		this.description = decsription;
 		this.header = header;
@@ -52,11 +52,11 @@ public class WorkItem {
 		this.users = users;
 	}
 
-	public List<IssueVO> getAssignedIssues() {
+	public List<Issue> getAssignedIssues() {
 		return assignedIssues;
 	}
 
-	public void setAssignedIssues(List<IssueVO> assignedIssues) {
+	public void setAssignedIssues(List<Issue> assignedIssues) {
 		this.assignedIssues = assignedIssues;
 	}
 

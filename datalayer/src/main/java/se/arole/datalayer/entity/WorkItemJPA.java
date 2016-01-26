@@ -28,7 +28,7 @@ public class WorkItemJPA implements Serializable{
 	User solver;
 	@OneToMany
     @JoinColumn(name = "fk_workItem_id")
-	List<Issue> issue;
+	List<IssueJPA> issue;
 	public WorkItemJPA() {
 		
 	}
@@ -39,7 +39,7 @@ public class WorkItemJPA implements Serializable{
 		this.status = status;
 	}
 	
-	public WorkItemJPA(Integer itemId, String description, String status, User solver, List<Issue> issue) {
+	public WorkItemJPA(Integer itemId, String description, String status, User solver, List<IssueJPA> issue) {
 		super();
 		this.itemId = itemId;
 		this.description = description;
@@ -71,10 +71,10 @@ public class WorkItemJPA implements Serializable{
 	public void setSolver(User solver) {
 		this.solver = solver;
 	}
-	public List<Issue> getIssue() {
-		return new ArrayList<Issue>(issue);
+	public List<IssueJPA> getIssue() {
+		return new ArrayList<IssueJPA>(issue);
 	}
-	public void setIssue(List<Issue> issue) {
+	public void setIssue(List<IssueJPA> issue) {
 		this.issue = issue;
 	}
 	

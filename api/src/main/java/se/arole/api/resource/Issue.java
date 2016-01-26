@@ -1,13 +1,13 @@
 package se.arole.api.resource;
 
-public class IssueVO {
+public class Issue {
 
 	int issueId;
 	String description, header;
 	boolean isSolved;
 	
 	
-	public IssueVO(int issueId, String description, String header, boolean isSolved) {
+	public Issue(int issueId, String description, String header, boolean isSolved) {
 		
 		this.issueId = issueId;
 		this.description = description;

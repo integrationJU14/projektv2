@@ -3,11 +3,11 @@ package se.arole.api.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.arole.api.resource.IssueVO;
+import se.arole.api.resource.Issue;
 import se.arole.api.resource.Team;
 import se.arole.api.resource.UserVO;
 import se.arole.api.resource.WorkItem;
-import se.arole.datalayer.entity.Issue;
+import se.arole.datalayer.entity.IssueJPA;
 import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.entity.WorkItemJPA;
@@ -22,7 +22,7 @@ public static WorkItemJPA toWorkItemDb(WorkItem workItem){
 	String description=workItem.getDescription();
 	String status = null;
 	User solver=UserAdapter.toUserDb(workItem.getAssignedUser());
-	List<Issue> issue=null;
+	List<IssueJPA> issue=null;
 	
 		return new WorkItemJPA(itemId,description,status,solver,issue);
 		}
@@ -34,7 +34,7 @@ public static WorkItemJPA toWorkItemDb(WorkItem workItem){
 		String description=workItemJPA.getDescription();
 		String header=null;
 		List<UserVO> users = null;
-		List<IssueVO> assignedIssues = null;
+		List<Issue> assignedIssues = null;
 		UserVO assignedUser=UserAdapter.fromUserDb(workItemJPA.getSolver());
 		return new WorkItem(workItemId, description,
 				header,assignedUser,users,assignedIssues);
