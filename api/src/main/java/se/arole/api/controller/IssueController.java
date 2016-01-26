@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 import se.arole.api.adapter.IssueAdapter;
-import se.arole.api.resource.IssueVO;
-import se.arole.api.resource.WorkItemVO;
-import se.arole.datalayer.entity.Issue;
-import se.arole.datalayer.entity.WorkItem;
+import se.arole.api.adapter.UserAdapter;
+import se.arole.api.resource.Issue;
+import se.arole.api.resource.WorkItem;
+import se.arole.datalayer.entity.IssueJPA;
+import se.arole.datalayer.entity.WorkItemJPA;
 import se.arole.datalayer.service.IssueService;
 
 public final class IssueController {
@@ -20,31 +21,43 @@ public final class IssueController {
 		this.issueService = issueService;
 	}
 
-	public Collection<IssueVO> getAll() {
-		return Collections.emptyList();
+	public Collection<Issue> getAll() {
+		
+		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
+		List<IssueJPA> issueListTemp = new ArrayList<IssueJPA>();
+		
+		for(WorkItemJPA workItem : workItemList){
+			
+			issueListTemp.addAll(workItem.getIssue());
+			
+		}
+		
+		List<Issue> issueList = IssueAdapter.fromDbIssueList(issueListTemp);
+		
+		return issueList;
 	}
 
-	public IssueVO create(IssueVO issue) {
-		Issue issueDb = IssueAdapter.toIssueDb(issue);
-		Issue createdIssue = issueService.createIssue(issueDb);
+	public Issue create(Issue issue) {
+		IssueJPA issueDb = IssueAdapter.toIssueDb(issue);
+		IssueJPA createdIssue = issueService.createIssue(issueDb);
 
 		return IssueAdapter.fromIssueDb(createdIssue);
 	}
 
-	public IssueVO update(Integer id, IssueVO issue) {
-		Issue issueDb = IssueAdapter.toIssueDb(issue);
-		Issue updatedIssue = issueService.updateIssue(issueDb, id);
+	public Issue update(Integer id, Issue issue) {
+		IssueJPA issueDb = IssueAdapter.toIssueDb(issue);
+		IssueJPA updatedIssue = issueService.updateIssue(issueDb, id);
 
 		return IssueAdapter.fromIssueDb(updatedIssue);
 	}
 
-	public List<WorkItem> workItemsWithIssues(){
+	public List<WorkItemJPA> workItemsWithIssues(){
 		
-		List<WorkItem> workItemList = issueService.workItemsWithIssues();
+		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
 		List<Issue> issueList = new ArrayList<Issue>();
 		
 		//does this work?
-		for(WorkItem workItem : workItemList){
+		for(WorkItemJPA workItem : workItemList){
 			
 			if(workItem.getIssue().isEmpty())
 				workItemList.remove(workItem);
@@ -54,32 +67,25 @@ public final class IssueController {
 		return workItemList;
 	}
 
-	public void addIssueToWorkItem(WorkItem workItem, Issue issue) {
+	public void addIssueToWorkItem(WorkItemJPA workItem, IssueJPA issue) {
 
-		List<Issue> issueList = workItem.getIssue();
+		List<IssueJPA> issueList = workItem.getIssue();
 
 		issueList.add(issue);
 
 		workItem.setIssue(issueList);
 	}
 
-	public IssueVO getIssue(Integer id) {
-		List<WorkItem> workItemList = issueService.workItemsWithIssues();
-		List<Issue> issueList = new ArrayList<Issue>();
+	public Issue getIssue(Integer id) {
+		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
+		List<IssueJPA> issueList = new ArrayList<IssueJPA>();
 
-		for (WorkItem workItem : workItemList) {
+		for (WorkItemJPA workItem : workItemList) {
 
-			for (Issue issue : workItem.getIssue()) {
+			for (IssueJPA issue : workItem.getIssue()) {
 
-				if (id == issue.getIssueId()) {
-
-					// fix
-					// IssueVO tempIssue = new IssueVO(issue.getIssueId(),
-					// issue.getDescription(), issue.getHeader(),
-					// issue.isSolved());
-
+				if (id == issue.getIssueId())
 					return IssueAdapter.fromIssueDb(issue);
-				}
 
 			}
 

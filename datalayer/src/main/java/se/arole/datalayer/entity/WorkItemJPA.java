@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class WorkItem implements Serializable{
+public class WorkItemJPA implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -28,18 +28,18 @@ public class WorkItem implements Serializable{
 	User solver;
 	@OneToMany
     @JoinColumn(name = "fk_workItem_id")
-	List<Issue> issue;
-	public WorkItem() {
+	List<IssueJPA> issue;
+	public WorkItemJPA() {
 		
 	}
-	public WorkItem(Integer itemId, String description, String status) {
+	public WorkItemJPA(Integer itemId, String description, String status) {
 		super();
 		this.itemId = itemId;
 		this.description = description;
 		this.status = status;
 	}
 	
-	public WorkItem(Integer itemId, String description, String status, User solver, List<Issue> issue) {
+	public WorkItemJPA(Integer itemId, String description, String status, User solver, List<IssueJPA> issue) {
 		super();
 		this.itemId = itemId;
 		this.description = description;
@@ -71,10 +71,10 @@ public class WorkItem implements Serializable{
 	public void setSolver(User solver) {
 		this.solver = solver;
 	}
-	public List<Issue> getIssue() {
-		return new ArrayList<Issue>(issue);
+	public List<IssueJPA> getIssue() {
+		return new ArrayList<IssueJPA>(issue);
 	}
-	public void setIssue(List<Issue> issue) {
+	public void setIssue(List<IssueJPA> issue) {
 		this.issue = issue;
 	}
 	

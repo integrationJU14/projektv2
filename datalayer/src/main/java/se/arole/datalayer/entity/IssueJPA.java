@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 @Entity
-public class Issue implements Serializable {
+public class IssueJPA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -21,13 +21,13 @@ public class Issue implements Serializable {
 	boolean isSolved;
 	@ManyToOne
     @JoinColumn(name = "fk_workItem_id")
-	WorkItem workItem;
+	WorkItemJPA workItemJPA;
 
-	public Issue() {
+	public IssueJPA() {
 
 	}
 
-	public Issue(Integer issueId, String description, String header, boolean isSolved) {
+	public IssueJPA(Integer issueId, String description, String header, boolean isSolved) {
 		super();
 		this.issueId = issueId;
 		this.description=description;
@@ -59,12 +59,12 @@ public class Issue implements Serializable {
 		this.description = message;
 	}
 
-	public WorkItem getWorkItem() {
-		return workItem;
+	public WorkItemJPA getWorkItem() {
+		return workItemJPA;
 	}
 
-	public void setWorkItem(WorkItem workItem) {
-		this.workItem = workItem;
+	public void setWorkItem(WorkItemJPA workItemJPA) {
+		this.workItemJPA = workItemJPA;
 	}
 
 	public String getHeader() {
