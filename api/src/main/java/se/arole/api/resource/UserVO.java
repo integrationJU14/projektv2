@@ -7,7 +7,7 @@ public class UserVO {
 	Integer userId; 
 	boolean isActive;
 	String userName, firstName, lastName;
-	List<WorkItemVO> assignedWorkItems;
+	List<WorkItem> assignedWorkItems;
 	
 	public UserVO(Integer userId, boolean isActive, String userName, String firstName, String lastName){
 		this.userId = userId;

@@ -15,9 +15,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.google.gson.JsonObject;
 
 import se.arole.api.controller.UserController;
 import se.arole.api.resource.UserVO;
@@ -28,13 +29,9 @@ import se.arole.webapi.config.Config;
 @Consumes(MediaType.APPLICATION_JSON)
 public final class UserResource {
 
-	static {
-		SPRINGCONTEXT = new AnnotationConfigApplicationContext(Config.class);
-	}
-
-	@Autowired
+	// @Autowired
 	private UserController userController;
-	private final static ApplicationContext SPRINGCONTEXT;
+
 	@Context
 	private UriInfo uriInfo;
 
@@ -43,7 +40,8 @@ public final class UserResource {
 	}
 
 	public UserResource() {
-		userController = SPRINGCONTEXT.getBean(UserController.class);
+		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+		userController = context.getBean(UserController.class);
 	}
 
 	@GET
