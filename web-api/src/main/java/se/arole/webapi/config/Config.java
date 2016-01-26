@@ -1,14 +1,7 @@
 package se.arole.webapi.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
-import se.arole.api.controller.TeamController;
-import se.arole.api.controller.UserController;
-import se.arole.datalayer.service.TeamService;
-import se.arole.datalayer.serviceImp.TeamServiceImpl;
-import se.arole.datalayer.serviceImp.UserServiceImp;
-import se.arole.webapi.resources.UserResource;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +13,27 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import se.arole.api.controller.IssueController;
+import se.arole.api.controller.TeamController;
+import se.arole.api.controller.UserController;
+import se.arole.datalayer.serviceImp.IssueServiceImpl;
+import se.arole.datalayer.serviceImp.TeamServiceImpl;
+import se.arole.datalayer.serviceImp.UserServiceImp;
+import se.arole.datalayer.serviceImp.WorkItemServiceImpl;
 
 @Configuration
 @EnableJpaRepositories("se.arole.datalayer.repository")
 @EnableTransactionManagement
 public class Config {
 
+	@Bean
+	public IssueController issueController() {
+		return new IssueController(issueService());
+	}
+	
 	@Bean
 	public TeamController teamController() {
 		return new TeamController();
@@ -37,9 +43,19 @@ public class Config {
 	public UserController userController() {
 		return new UserController(userServce());
 	}
+	
+	@Bean
+	public WorkItemServiceImpl workItemService(){
+		return new WorkItemServiceImpl();
+	}
+	
+	@Bean
+	public IssueServiceImpl issueService() {
+		return new IssueServiceImpl();
+	}
 
 	@Bean
-	public TeamServiceImpl TeamService() {
+	public TeamServiceImpl teamService() {
 		return new TeamServiceImpl();
 	}
 
