@@ -9,9 +9,7 @@ import com.google.gson.JsonObject;
 
 import se.arole.api.resource.IssueVO;
 import se.arole.api.resource.UserVO;
-import se.arole.api.resource.WorkItemVO;
-import se.arole.datalayer.entity.Issue;
-import se.arole.datalayer.entity.User;
+import se.arole.api.resource.WorkItem;
 
 public class JsonObjectMapper {
 
@@ -31,7 +29,7 @@ public class JsonObjectMapper {
 
 	}
 
-	public JsonElement workItemVOToJson(WorkItemVO workItemVO) {
+	public JsonElement workItemVOToJson(WorkItem workItemVO) {
 
 		JsonObject json = new JsonObject();
 		json.addProperty("workItemId", workItemVO.getWorkItemId());
@@ -69,8 +67,8 @@ public class JsonObjectMapper {
 
 		return jsonIssue;
 	}
-
-	public WorkItemVO jsonToWorkItemVO(JsonElement json) {
+ 
+	public WorkItem jsonToWorkItemVO(JsonElement json) {
 
 		JsonObject workItemJson = json.getAsJsonObject();
 		int workItemId = workItemJson.get("workItemId").getAsInt();
@@ -92,7 +90,7 @@ public class JsonObjectMapper {
 			assignedIssues.add(jasonToIssue(e));
 		});
 
-		return new WorkItemVO(workItemId, description, header, assignedUser, usersVO, assignedIssues);
+		return new WorkItem(workItemId, description, header, assignedUser, usersVO, assignedIssues);
 
 	}
 
