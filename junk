@@ -1,0 +1,7 @@
+	@Override
+	public Collection<User> getAll() {
+		Iterable<User> findAll = userRepository.findAll();
+		Collection<User> users = new ArrayList<>();
+		findAll.forEach(u -> users.add(u));
+		return users;
+	}
