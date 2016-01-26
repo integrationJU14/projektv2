@@ -15,13 +15,13 @@ public class IssueAdapter {
 		String issueHeader = issue.getHeader();
 		boolean isSolved = issue.isSolved();
 
-		return new Issue(issueId, issueDescription, isSolved);
+		return new Issue(issueId, issueDescription, issueHeader, isSolved);
 	}
 
 	public static IssueVO fromIssueDb(Issue issueDb) {
 
 		Integer issueId = issueDb.getIssueId();
-		String issueDescription = issueDb.getMessage();
+		String issueDescription = issueDb.getDescription();
 		String issueHeader = null;
 		boolean isSolved = issueDb.isSolved();
 

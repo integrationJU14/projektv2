@@ -60,7 +60,7 @@ public class JsonObjectMapper {
 
 	}
 
-	private JsonElement issueToJason(IssueVO issueVO) {
+	public JsonElement issueToJason(IssueVO issueVO) {
 		JsonObject jsonIssue = new JsonObject();
 		jsonIssue.addProperty("issueId", issueVO.getIssueId());
 		jsonIssue.addProperty("description", issueVO.getDescription());
@@ -99,10 +99,10 @@ public class JsonObjectMapper {
 	public IssueVO jasonToIssue(JsonElement e) {
 		
 		JsonObject issueJson = e.getAsJsonObject();
+		
 		int issueId = issueJson.get("issueId").getAsInt();
 		String description = issueJson.get("description").getAsString();
 		String header = issueJson.get("header").getAsString();
-
 		boolean isSolved = issueJson.get("isSolved").getAsBoolean();
 
 		return new IssueVO(issueId, description, header, isSolved);
