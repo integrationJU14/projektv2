@@ -33,15 +33,19 @@ public final class UserResource {
 	// @Autowired
 	private UserController userController;
 
+	static {
+		context = new AnnotationConfigApplicationContext(Config.class);
+	}
+
 	@Context
 	private UriInfo uriInfo;
+	private final static ApplicationContext context;
 
 	public UserResource(UserController userController2) {
 		this.userController = userController2;
 	}
 
 	public UserResource() {
-		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 		userController = context.getBean(UserController.class);
 	}
 
@@ -80,7 +84,6 @@ public final class UserResource {
 		return Response.created(location).build();
 	}
 
-	
 	@PUT
 	@Path("{id}")
 	public Response updateUser(@PathParam("id") Integer id, User user) {
@@ -89,8 +92,8 @@ public final class UserResource {
 		User updatedUser = userController.update(id, user);
 
 		return Response.ok(updatedUser).build();
-	 }
-	
+	}
+
 	@GET
 	@Path("{id}")
 	public Response getUser(@PathParam("id") Integer id) {
