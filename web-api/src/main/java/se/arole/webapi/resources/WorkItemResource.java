@@ -4,12 +4,10 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 
-import javax.json.JsonObjectBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -18,20 +16,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import se.arole.api.controller.WorkItemController;
-import se.arole.api.resource.Team;
-import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
-import se.arole.webapi.adapter.JsonObjectMapper;
 import se.arole.webapi.config.Config;
 
 @Path("work")
@@ -72,16 +63,12 @@ public class WorkItemResource {
 		return Response.created(location).build();
 	}
 
-	// @GET
-	// @Path("{id}")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public Response getUser(@PathParam("id") Integer id) {
-	//
-	// WorkItem work = workItemController.findByItemId(id);
-	//
-	// return Response.ok(work).build();
-
-	// }
+	@GET
+	@Path("{id}")
+	public Response getUser(@PathParam("id") Integer id) {
+		WorkItem work = workItemController.findByItemId(id);
+		return Response.ok(work).build();
+	}
 
 	// @PUT
 	// @Path("{id}")
