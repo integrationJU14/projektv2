@@ -32,12 +32,6 @@ public final class IssueResource {
 	// @Autowired
 	private IssueController issueController;
 
-	static {
-		SPRINGCONTEXT = new AnnotationConfigApplicationContext(Config.class);
-
-	}
-
-	private static final ApplicationContext SPRINGCONTEXT;
 	@Context
 	private UriInfo uriInfo;
 
@@ -46,7 +40,8 @@ public final class IssueResource {
 	}
 
 	public IssueResource() {
-		issueController = SPRINGCONTEXT.getBean(IssueController.class);
+		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+		issueController = context.getBean(IssueController.class);
 	}
 
 	@GET
@@ -62,6 +57,7 @@ public final class IssueResource {
 		Issue createdIssue = issueController.create(Issue);
 		URI location = uriInfo.getAbsolutePathBuilder().path("" + createdIssue.getIssueId()).build();
 
+		
 		return Response.created(location).build();
 	}
 
