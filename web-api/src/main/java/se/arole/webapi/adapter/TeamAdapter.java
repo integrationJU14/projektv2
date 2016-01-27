@@ -18,18 +18,19 @@ import se.arole.api.resource.UserVO;
 
 public class TeamAdapter implements JsonSerializer<Team>, JsonDeserializer<Team> {
 
-	private final static JsonObjectMapper mapper = new JsonObjectMapper();
+	private final static JsonObjectMapper JSON_MAPPER = new JsonObjectMapper();
 
 	@Override
 	public Team deserialize(JsonElement json, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
 		JsonObject jsonObject = json.getAsJsonObject();
 		Integer teamId = jsonObject.get("teamId").getAsInt();
 		String teamName = jsonObject.get("teamName").getAsString();
+
 		List<UserVO> teamUsers = new ArrayList<>();
 		jsonObject.get("teamUsers").getAsJsonArray().forEach(tu -> {
-			teamUsers.add(mapper.jasonToUser(tu));
+			teamUsers.add(JSON_MAPPER.jasonToUser(tu));
 		});
-		;
+
 		return new Team(teamId, teamName, teamUsers);
 	}
 
@@ -38,9 +39,11 @@ public class TeamAdapter implements JsonSerializer<Team>, JsonDeserializer<Team>
 		JsonObject json = new JsonObject();
 		json.addProperty("teamId", team.getTeamId());
 		json.addProperty("teamName", team.getTeamName());
+		
 		JsonArray usersJson = new JsonArray();
-		team.getTeamUsers().forEach(u -> usersJson.add(mapper.userToJason(u)));
+		team.getTeamUsers().forEach(u -> usersJson.add(JSON_MAPPER.userToJason(u)));
 		json.add("teamUsers", usersJson);
+		
 		return json;
 	}
 

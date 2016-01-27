@@ -19,7 +19,9 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamJPA createTeam(TeamJPA team) {
-
+		if (teamRepository.findByTeamId(team.getTeamId()) != null) {
+			throw new IllegalArgumentException("TeamId already existing");
+		}
 		return teamRepository.save(team);
 	}
 

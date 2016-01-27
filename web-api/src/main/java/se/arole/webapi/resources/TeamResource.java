@@ -53,9 +53,13 @@ public class TeamResource {
 
 	@POST
 	public Response addTeam(Team team) {
-		Team add = teamController.add(team);
-		URI location = uriInfo.getAbsolutePathBuilder().path("" + add.getTeamId()).build();
-		return Response.created(location).build();
+		try {
+			Team add = teamController.add(team);
+			URI location = uriInfo.getAbsolutePathBuilder().path("" + add.getTeamId()).build();
+			return Response.created(location).build();
+		} catch (IllegalArgumentException e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 	}
 
 	@GET

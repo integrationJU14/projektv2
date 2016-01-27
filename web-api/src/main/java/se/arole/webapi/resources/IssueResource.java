@@ -29,19 +29,24 @@ import se.arole.webapi.config.Config;
 @Consumes(MediaType.APPLICATION_JSON)
 public final class IssueResource {
 
+	static {
+		SPRINGCONTEXT = new AnnotationConfigApplicationContext(Config.class);
+	}
+
 	// @Autowired
 	private IssueController issueController;
 
 	@Context
 	private UriInfo uriInfo;
 
+	private final static ApplicationContext SPRINGCONTEXT;
+
 	public IssueResource(IssueController issueController) {
 		this.issueController = issueController;
 	}
 
 	public IssueResource() {
-		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-		issueController = context.getBean(IssueController.class);
+		issueController = SPRINGCONTEXT.getBean(IssueController.class);
 	}
 
 	@GET
@@ -57,7 +62,6 @@ public final class IssueResource {
 		Issue createdIssue = issueController.create(Issue);
 		URI location = uriInfo.getAbsolutePathBuilder().path("" + createdIssue.getIssueId()).build();
 
-		
 		return Response.created(location).build();
 	}
 

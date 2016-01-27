@@ -14,7 +14,7 @@ import se.arole.api.resource.Issue;
 
 public final class IssueAdapter implements JsonSerializer<Issue>, JsonDeserializer<Issue> {
 
-	JsonObjectMapper jsonMapper;
+	private final static JsonObjectMapper jsonMapper = new JsonObjectMapper();
 	
 	// JsonSerializer
 	@Override
