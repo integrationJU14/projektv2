@@ -43,14 +43,12 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void addUserToTeam(UserJPA user, int teamId) {
-		List<UserJPA> users;
+		List<UserJPA> users = new ArrayList<UserJPA>();
 
 		TeamJPA team = teamRepository.findByTeamId(teamId);
 
 		if (team.getUsers() != null)
 			users = team.getUsers();
-		else
-			users = new ArrayList<UserJPA>();
 
 		users.add(user);
 		team.setUsers(users);
@@ -61,6 +59,13 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public TeamJPA getTeam(int teamId) {
 		return teamRepository.findByTeamId(teamId);
+	}
+
+	@Override
+	public void deleteTeam(Integer teamId) {
+		TeamJPA team = teamRepository.findByTeamId(teamId);
+
+		teamRepository.delete(team);
 	}
 
 }

@@ -17,4 +17,6 @@ public interface TeamService {
 	
 	TeamJPA getTeam(int teamId);
 
+	void deleteTeam(Integer teamId);
+
 }
