@@ -11,7 +11,6 @@ import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.service.TeamService;
 import se.arole.datalayer.service.UserService;
-import se.arole.datalayer.serviceImp.TeamServiceImpl;
 
 public class TeamController {
 
@@ -19,10 +18,6 @@ public class TeamController {
 	private TeamService teamService;
 	@Autowired
 	private UserService userService;
-
-	public TeamController(TeamService teamService) {
-		this.teamService = teamService;
-	}
 
 	public List<Team> getAll() {
 		List<Team> teams = new ArrayList<>();
