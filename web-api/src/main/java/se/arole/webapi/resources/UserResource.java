@@ -19,7 +19,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.google.gson.JsonObject;
-
+import javax.ws.rs.QueryParam;
 import se.arole.api.controller.UserController;
 import se.arole.api.resource.UserVO;
 import se.arole.webapi.config.Config;
@@ -45,11 +45,30 @@ public final class UserResource {
 	}
 
 	@GET
-	public Response getAll() {
-		Collection<UserVO> all = userController.getAll();
-		GenericEntity<Collection<UserVO>> result = new GenericEntity<Collection<UserVO>>(all) {
-		};
-		return Response.ok(result).build();
+	public Response getAll(@QueryParam("userName") String userName, @QueryParam("firstName") String firstName,
+			@QueryParam("lastName") String lastName) {
+
+		if (userName == null && firstName == null && lastName == null) {
+			Collection<UserVO> all = userController.getAll();
+			GenericEntity<Collection<UserVO>> result = new GenericEntity<Collection<UserVO>>(all) {
+			};
+			return Response.ok(result).build();
+		}
+		if (userName != null) {
+			UserVO user = userController.getUserByUsername(userName);
+			return Response.ok(user).build();
+		}
+		if (firstName != null) {
+			UserVO user = userController.getUserByFirstname(firstName);
+			return Response.ok(user).build();
+		}
+		if (lastName != null) {
+			UserVO user = userController.getUserByLastname(lastName);
+			return Response.ok(user).build();
+		}
+
+		return Response.noContent().build();
+
 	}
 
 	@POST

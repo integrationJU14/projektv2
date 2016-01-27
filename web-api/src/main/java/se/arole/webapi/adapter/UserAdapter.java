@@ -20,6 +20,8 @@ public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializ
 
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", user.getUserId());
+		json.addProperty("firstName", user.getFirstName());
+		json.addProperty("lastName", user.getLastName());
 		json.addProperty("userName", user.getUserName());
 		json.addProperty("isActive", user.isActive());
 
@@ -33,9 +35,12 @@ public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializ
 
 		JsonObject userJson = json.getAsJsonObject();
 		Integer id = userJson.get("userId").getAsInt();
-		String username = userJson.get("userName").getAsString();
+		String userName = userJson.get("userName").getAsString();
+		String firstName = userJson.get("firstName").getAsString();
+		String lastName = userJson.get("lastName").getAsString();
+
 		boolean isActive = userJson.get("isActive").getAsString() != null;
 
-		return new UserVO(id, isActive, username, "", "");
+		return new UserVO(id, isActive, userName, firstName, lastName);
 	}
 }

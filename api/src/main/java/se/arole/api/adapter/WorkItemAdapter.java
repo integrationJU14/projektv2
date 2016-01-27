@@ -17,7 +17,7 @@ public class WorkItemAdapter {
 		Integer itemId = (int) workItem.getWorkItemId();
 		String description = workItem.getDescription();
 		String status = "";
-		User solver = new User("", 0, false);
+		User solver = new User("","", status, 0, false);
 		List<IssueJPA> issue = new ArrayList<IssueJPA>();
 
 		if (workItem.getAssignedUser() != null)

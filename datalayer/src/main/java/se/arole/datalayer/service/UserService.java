@@ -10,8 +10,11 @@ public interface UserService {
 	User updateUser (User user, Integer userId);
 	void changeStatusUser (boolean isActive, Integer userId);
 	User getUser (Integer userId);
-	User getUserByUsername (String userName);
+	User getUserByUsername (String username);
+	User getUserByFirstname (String firstname);
+	User getUserByLastname (String lastName);
+
 	Collection<User> getAll();
-	
+	Collection<User> getAllByName(User user);
 
 }

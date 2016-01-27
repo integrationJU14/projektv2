@@ -26,8 +26,7 @@ public class UserServiceImp implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	public UserServiceImp() {
-	}
+	public UserServiceImp() {}
 
 	@Override
 	public User createUser(User user) {
@@ -46,7 +45,8 @@ public class UserServiceImp implements UserService {
 	public void changeStatusUser(boolean isActive, Integer userId) {
 		User tempUser = userRepository.findByUserId(userId);
 		userRepository.delete(tempUser.getId());
-		userRepository.save(new User(tempUser.getName(), tempUser.getUserId(), isActive));
+		userRepository.save(new User(tempUser.getUserName(),tempUser.getFirstName(),tempUser.getLastName(), tempUser.getUserId(), isActive));
+
 
 	}
 
@@ -56,10 +56,24 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public User getUserByUsername(String userName) {
+	public User getUserByUsername(String username) {
 		List<User> users = (List<User>) userRepository.findAll();
-		return users.stream().filter(user -> user.getName().contains(userName)).findFirst().orElse(null);
+		return users.stream().filter(user -> user.getUserName().equals(username)).findFirst().orElse(null);
 	}
+	
+
+	@Override
+	public User getUserByFirstname(String firstname) {
+		List<User> users = (List<User>) userRepository.findAll();
+		return users.stream().filter(user -> user.getFirstName().equals(firstname)).findFirst().orElse(null);
+	}
+
+	@Override
+	public User getUserByLastname(String lastname) {
+		List<User> users = (List<User>) userRepository.findAll();
+		return users.stream().filter(user -> user.getLastName().equals(lastname)).findFirst().orElse(null);
+	}
+
 
 	@Override
 	public Collection<User> getAll() {
@@ -67,6 +81,14 @@ public class UserServiceImp implements UserService {
 		Collection<User> users = new ArrayList<>();
 		findAll.forEach(u -> users.add(u));
 		return users;
+	}
+	
+	@Override
+	public Collection<User> getAllByName(User user) {
+		List<User> users = (List<User>) userRepository.findAll();
+		List<User> match = new ArrayList<User>();
+		
+		return null;
 	}
 
 }

@@ -10,19 +10,23 @@ public class UserAdapter {
 
 	public static User toUserDb(UserVO user) {
 		String userName = user.getUserName();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
 		boolean isActive = user.isActive();
 
 		// TODO: Check Integer/Long as UserId
 		Integer userId = (int) user.getUserId();
 
-		return new User(userName, userId, isActive);
+		return new User(userName, firstName, lastName, userId, isActive);
 	}
 
 	public static UserVO fromUserDb(User userDb) {
 		Integer id = userDb.getUserId();
-		String userName = userDb.getName();
+		String userName = userDb.getUserName();
+		String firstName = userDb.getFirstName();
+		String lastName = userDb.getLastName();
 
-		return new UserVO(id, true, userName, "", "");
+		return new UserVO(id, true, userName, firstName, lastName);
 	}
 	
 	public static List<User> toDbUserList(List<UserVO> userList){

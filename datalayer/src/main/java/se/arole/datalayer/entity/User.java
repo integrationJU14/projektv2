@@ -18,7 +18,11 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	@Column
-	private String name;
+	private String userName;
+	@Column
+	private String firstName;
+	@Column
+	private String lastName;
 	@Column
 	private Integer userId;
 	@Column
@@ -26,23 +30,30 @@ public class User {
 	
 	
 	
-	public User() {
-		
-	}
-
-	public User(String name, Integer userId, boolean isActive) {
+public User() {}
+	
+	public User(String userName, String firstName, String lastName, Integer userId, boolean isActive) {
 		super();
-		this.name = name;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userId = userId;
 		this.isActive = isActive;
 	}
-	
 	public Integer getUserId() {
 		return userId;
 	}
 	
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
 	}
 	
 	public Long getId() {
@@ -51,7 +62,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", userId=" + userId + ", isActive=" + isActive + "]";
+		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", userId="
+				+ userId + ", isActive=" + isActive + "]";
+
 	}
 	
 }

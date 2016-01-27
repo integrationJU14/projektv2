@@ -17,10 +17,10 @@ import se.arole.datalayer.entity.User;
  * @author Holstad
  *
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = { Config.class })
-//@TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @Ignore
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { Config.class })
+@TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 public class UserServiceImpTest {
 
 	private User user;
@@ -29,7 +29,7 @@ public class UserServiceImpTest {
 
 	@Before
 	public void initUser() {
-		user = new User("MrTest", 1000000000, true);
+		user = new User("MrTest","firstNameTest","lastNameTest", 1000000000, true);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class UserServiceImpTest {
 	
 	@Test
 	public void updateUserTest(){
-		User updatedUser = new User("MrTestUpdate",user.getUserId(),true);
+		User updatedUser = new User("MrTestUpdate","firstNameTest","firstNameTest",user.getUserId(),true);
 		userServiceImp.updateUser(updatedUser, user.getUserId());
 	}
 	
@@ -50,7 +50,7 @@ public class UserServiceImpTest {
 	}
 	@Test
 	public void getUserById(){
-		userServiceImp.createUser(new User("getMe", 746357, true));
+		userServiceImp.createUser(new User("getMe","Ola","Holstad", 746357, true));
 		User userTemp = userServiceImp.getUser(746357);
 		System.out.println(userTemp.toString());
 	

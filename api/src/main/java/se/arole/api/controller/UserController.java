@@ -49,9 +49,22 @@ public final class UserController {
 		return UserAdapter.fromUserDb(user);
 	}
 
-	public UserVO getUser(String userName) {
+	public UserVO getUserByUsername(String userName) {
 		User userByUsername = userService.getUserByUsername(userName);
 
 		return UserAdapter.fromUserDb(userByUsername);
 	}
+	
+	public UserVO getUserByFirstname(String firstName) {
+		User userByFirstname = userService.getUserByUsername(firstName);
+
+		return UserAdapter.fromUserDb(userByFirstname);
+	}
+	
+	public UserVO getUserByLastname(String lastName) {
+		User userByLastname = userService.getUserByLastname(lastName);
+
+		return UserAdapter.fromUserDb(userByLastname);
+	}
+
 }

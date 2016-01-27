@@ -20,10 +20,10 @@ public class ServiceImpTest {
 	UserServiceImp userService;
 	
 //	@Test
-	public void springConfigTest() {
-		User user = new User("Lina", 3, true);
-		userService.createUser(user);
-		
-	}
+//	public void springConfigTest() {
+//		User user = new User("Lina", 3, true);
+//		userService.createUser(user);
+//		
+//	}
 
 }
