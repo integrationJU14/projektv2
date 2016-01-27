@@ -49,20 +49,20 @@ public final class UserController {
 		return UserAdapter.fromUserDb(user);
 	}
 
-	public User getUserByUsername(String userName) {
-		UserJPA userByUsername = userService.getUserByUsername(userName);
+	public User getUserByUserName(String userName) {
+		UserJPA userByUsername = userService.getUserByUserName(userName);
 
 		return UserAdapter.fromUserDb(userByUsername);
 	}
 	
-	public User getUserByFirstname(String firstName) {
-		UserJPA userByFirstname = userService.getUserByUsername(firstName);
+	public User getUserByFirstName(String firstName) {
+		UserJPA userByFirstname = userService.getUserByUserName(firstName);
 
 		return UserAdapter.fromUserDb(userByFirstname);
 	}
 	
-	public User getUserByLastname(String lastName) {
-		UserJPA userByLastname = userService.getUserByLastname(lastName);
+	public User getUserByLastName(String lastName) {
+		UserJPA userByLastname = userService.getUserByLastName(lastName);
 
 		return UserAdapter.fromUserDb(userByLastname);
 	}

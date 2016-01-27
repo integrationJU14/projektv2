@@ -60,6 +60,14 @@ public UserJPA() {}
 		return id;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", userId="

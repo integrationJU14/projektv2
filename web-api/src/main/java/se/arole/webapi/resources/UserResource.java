@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,15 +56,15 @@ public final class UserResource {
 			return Response.ok(result).build();
 		}
 		if (userName != null) {
-			User user = userController.getUserByUsername(userName);
+			User user = userController.getUserByUserName(userName);
 			return Response.ok(user).build();
 		}
 		if (firstName != null) {
-			User user = userController.getUserByFirstname(firstName);
+			User user = userController.getUserByFirstName(firstName);
 			return Response.ok(user).build();
 		}
 		if (lastName != null) {
-			User user = userController.getUserByLastname(lastName);
+			User user = userController.getUserByLastName(lastName);
 			return Response.ok(user).build();
 		}
 
@@ -79,17 +80,17 @@ public final class UserResource {
 		return Response.created(location).build();
 	}
 
-	//
-	//// @PUT
-	//// @Path("{id}")
-	//// public Response updateUser(@PathParam("id") Integer id, UserVO user) {
-	////
-	//// userController.getUser(id);
-	//// UserVO updatedUser = userController.update(id, user);
-	////
-	//// return Response.ok(updatedUser).build();
-	//// }
-	//
+	
+	@PUT
+	@Path("{id}")
+	public Response updateUser(@PathParam("id") Integer id, User user) {
+
+		userController.getUser(id);
+		User updatedUser = userController.update(id, user);
+
+		return Response.ok(updatedUser).build();
+	 }
+	
 	@GET
 	@Path("{id}")
 	public Response getUser(@PathParam("id") Integer id) {

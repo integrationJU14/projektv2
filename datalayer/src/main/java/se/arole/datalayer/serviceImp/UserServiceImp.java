@@ -56,22 +56,22 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public UserJPA getUserByUsername(String username) {
+	public UserJPA getUserByUserName(String userName) {
 		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getUserName().equals(username)).findFirst().orElse(null);
+		return users.stream().filter(user -> user.getUserName().equalsIgnoreCase(userName)).findFirst().orElse(null);
 	}
 	
 
 	@Override
-	public UserJPA getUserByFirstname(String firstname) {
+	public UserJPA getUserByFirstName(String firstName) {
 		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getFirstName().equals(firstname)).findFirst().orElse(null);
+		return users.stream().filter(user -> user.getFirstName().equalsIgnoreCase(firstName)).findFirst().orElse(null);
 	}
 
 	@Override
-	public UserJPA getUserByLastname(String lastname) {
+	public UserJPA getUserByLastName(String lastName) {
 		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getLastName().equals(lastname)).findFirst().orElse(null);
+		return users.stream().filter(user -> user.getLastName().equalsIgnoreCase(lastName)).findFirst().orElse(null);
 	}
 
 
