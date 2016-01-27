@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.datalayer.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +19,7 @@ public class UserControllerTest {
 	@Test
 	public void integrationTest() {
 		UserController userController = new UserController(userService);
-		UserVO user = new UserVO(5, true, "Ola", "", "");
+		User user = new User(5, true, "Ola", "", "");
 		userController.create(user);
 	}
 

@@ -10,13 +10,13 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 
-public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializer<UserVO> {
+public final class UserAdapter implements JsonSerializer<User>, JsonDeserializer<User> {
 
 	// JsonSerializer
 	@Override
-	public JsonElement serialize(UserVO user, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(User user, Type typeOfSrc, JsonSerializationContext context) {
 
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", user.getUserId());
@@ -30,7 +30,7 @@ public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializ
 
 	// JsonDeserializer
 	@Override
-	public UserVO deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+	public User deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
 		JsonObject userJson = json.getAsJsonObject();
@@ -41,6 +41,6 @@ public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializ
 
 		boolean isActive = userJson.get("isActive").getAsString() != null;
 
-		return new UserVO(id, isActive, userName, firstName, lastName);
+		return new User(id, isActive, userName, firstName, lastName);
 	}
 }

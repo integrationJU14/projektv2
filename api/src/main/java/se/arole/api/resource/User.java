@@ -2,14 +2,14 @@ package se.arole.api.resource;
 
 import java.util.List;
 
-public class UserVO {
+public class User {
 	
 	Integer userId; 
 	boolean isActive;
 	String userName, firstName, lastName;
 	List<WorkItem> assignedWorkItems;
 	
-	public UserVO(Integer userId, boolean isActive, String userName, String firstName, String lastName){
+	public User(Integer userId, boolean isActive, String userName, String firstName, String lastName){
 		this.userId = userId;
 		this.isActive = isActive;
 		this.userName = userName;
@@ -22,7 +22,7 @@ public class UserVO {
 		return userId;
 	}
 
-	public UserVO setUserId(Integer userId) {
+	public User setUserId(Integer userId) {
 		this.userId = userId;
 		
 		return this;

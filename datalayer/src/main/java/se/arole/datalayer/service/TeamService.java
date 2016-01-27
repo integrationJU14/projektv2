@@ -3,7 +3,7 @@ package se.arole.datalayer.service;
 import java.util.List;
 
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 
 public interface TeamService {
 
@@ -13,7 +13,7 @@ public interface TeamService {
 
 	List<TeamJPA> getAllTeams();
 
-	void addUserToTeam(User user, int teamId);
+	void addUserToTeam(UserJPA user, int teamId);
 	
 	TeamJPA getTeam(int teamId);
 

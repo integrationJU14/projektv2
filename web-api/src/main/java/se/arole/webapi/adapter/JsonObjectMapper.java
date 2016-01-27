@@ -8,12 +8,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import se.arole.api.resource.Issue;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 
 public class JsonObjectMapper {
 
-	public JsonElement userToJason(UserVO userVO) {
+	public JsonElement userToJason(User userVO) {
 
 		JsonObject jsonUser = new JsonObject();
 		jsonUser.addProperty("id", userVO.getUserId());
@@ -24,7 +24,7 @@ public class JsonObjectMapper {
 
 	}
 
-	public UserVO jasonToUser(JsonElement json) {
+	public User jasonToUser(JsonElement json) {
 		return null;
 
 	}
@@ -36,7 +36,7 @@ public class JsonObjectMapper {
 		json.addProperty("description", workItemVO.getDescription());
 		json.addProperty("header", workItemVO.getHeader());
 
-		UserVO assignedUser = workItemVO.getAssignedUser();
+		User assignedUser = workItemVO.getAssignedUser();
 
 		json.add("assignedUser", userToJason(assignedUser));
 
@@ -74,14 +74,14 @@ public class JsonObjectMapper {
 		int workItemId = workItemJson.get("workItemId").getAsInt();
 		String description = workItemJson.get("description").getAsString();
 		String header = workItemJson.get("header").getAsString();
-		List<UserVO> usersVO = new ArrayList<>();
+		List<User> usersVO = new ArrayList<>();
 		List<Issue> assignedIssues = new ArrayList<>();
-		UserVO assignedUser = jasonToUser(workItemJson.get("assignedUser"));
+		User assignedUser = jasonToUser(workItemJson.get("assignedUser"));
 
 		JsonArray usersJson = workItemJson.get("users").getAsJsonArray();
 		usersJson.forEach(e -> {
 
-			UserVO userVO = jasonToUser(e.getAsJsonObject());
+			User userVO = jasonToUser(e.getAsJsonObject());
 			usersVO.add(userVO);
 		});
 

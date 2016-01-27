@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="users")
-public class User {
+public class UserJPA {
 	
 	@Id
 	@GeneratedValue
@@ -30,9 +30,9 @@ public class User {
 	
 	
 	
-public User() {}
+public UserJPA() {}
 	
-	public User(String userName, String firstName, String lastName, Integer userId, boolean isActive) {
+	public UserJPA(String userName, String firstName, String lastName, Integer userId, boolean isActive) {
 		super();
 		this.userName = userName;
 		this.firstName = firstName;

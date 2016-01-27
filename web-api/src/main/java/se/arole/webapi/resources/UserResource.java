@@ -21,7 +21,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.google.gson.JsonObject;
 import javax.ws.rs.QueryParam;
 import se.arole.api.controller.UserController;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.webapi.config.Config;
 
 @Path("user")
@@ -49,21 +49,21 @@ public final class UserResource {
 			@QueryParam("lastName") String lastName) {
 
 		if (userName == null && firstName == null && lastName == null) {
-			Collection<UserVO> all = userController.getAll();
-			GenericEntity<Collection<UserVO>> result = new GenericEntity<Collection<UserVO>>(all) {
+			Collection<User> all = userController.getAll();
+			GenericEntity<Collection<User>> result = new GenericEntity<Collection<User>>(all) {
 			};
 			return Response.ok(result).build();
 		}
 		if (userName != null) {
-			UserVO user = userController.getUserByUsername(userName);
+			User user = userController.getUserByUsername(userName);
 			return Response.ok(user).build();
 		}
 		if (firstName != null) {
-			UserVO user = userController.getUserByFirstname(firstName);
+			User user = userController.getUserByFirstname(firstName);
 			return Response.ok(user).build();
 		}
 		if (lastName != null) {
-			UserVO user = userController.getUserByLastname(lastName);
+			User user = userController.getUserByLastname(lastName);
 			return Response.ok(user).build();
 		}
 
@@ -72,8 +72,8 @@ public final class UserResource {
 	}
 
 	@POST
-	public Response createUser(UserVO user) {
-		UserVO createdUser = userController.create(user);
+	public Response createUser(User user) {
+		User createdUser = userController.create(user);
 		URI location = uriInfo.getAbsolutePathBuilder().path("" + createdUser.getUserId()).build();
 
 		return Response.created(location).build();
@@ -93,7 +93,7 @@ public final class UserResource {
 	@GET
 	@Path("{id}")
 	public Response getUser(@PathParam("id") Integer id) {
-		UserVO user = userController.getUser(id);
+		User user = userController.getUser(id);
 
 		return Response.ok(user).build();
 	}

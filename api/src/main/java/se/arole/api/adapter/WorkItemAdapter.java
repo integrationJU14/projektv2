@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.arole.api.resource.Issue;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 import se.arole.datalayer.entity.IssueJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 
 public class WorkItemAdapter {
@@ -17,7 +17,7 @@ public class WorkItemAdapter {
 		Integer itemId = (int) workItem.getWorkItemId();
 		String description = workItem.getDescription();
 		String status = "";
-		User solver = new User("","", status, 0, false);
+		UserJPA solver = new UserJPA("","", status, 0, false);
 		List<IssueJPA> issue = new ArrayList<IssueJPA>();
 
 		if (workItem.getAssignedUser() != null)
@@ -31,9 +31,9 @@ public class WorkItemAdapter {
 		int workItemId = workItemJPA.getItemId();
 		String description = workItemJPA.getDescription();
 		String header = "";
-		List<UserVO> users = new ArrayList<UserVO>();
+		List<User> users = new ArrayList<User>();
 		List<Issue> assignedIssues = null;
-		UserVO assignedUser = new UserVO(0, false, "", "", "");
+		User assignedUser = new User(0, false, "", "", "");
 		if (workItemJPA.getSolver() != null)
 			assignedUser = UserAdapter.fromUserDb(workItemJPA.getSolver());
 		return new WorkItem(workItemId, description, header, assignedUser, users, assignedIssues);

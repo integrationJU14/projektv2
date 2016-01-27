@@ -4,7 +4,7 @@ import java.util.List;
 
 import se.arole.datalayer.entity.Status;
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 
 public interface WorkItemService {
@@ -13,11 +13,11 @@ public interface WorkItemService {
 
 	void changeStatusWorkItem(String status, Integer workItemId);
 
-	void addWorkItemToUser(WorkItemJPA workItem, User user);
+	void addWorkItemToUser(WorkItemJPA workItem, UserJPA user);
 
 	List<WorkItemJPA> workItemByStatus(String status);
 
-	List<WorkItemJPA> workItembyUser(User user);
+	List<WorkItemJPA> workItembyUser(UserJPA user);
 
 	List<WorkItemJPA> workItemsByTeam(TeamJPA team);
 

@@ -23,7 +23,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import se.arole.api.controller.WorkItemController;
 import se.arole.api.resource.Team;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 import se.arole.webapi.config.Config;
 

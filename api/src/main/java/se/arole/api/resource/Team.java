@@ -6,14 +6,14 @@ public class Team {
 	
 	private Integer teamId;
 	private String teamName;
-	private List<UserVO> teamUsers;
+	private List<User> teamUsers;
 	
 	public Team(Integer teamId, String teamName) {
 		this.teamId = teamId;
 		this.teamName = teamName;
 	}
 	
-	public Team(Integer teamId, String teamName, List<UserVO> members) {
+	public Team(Integer teamId, String teamName, List<User> members) {
 		this.teamId = teamId;
 		this.teamName = teamName;
 		this.teamUsers = members;
@@ -27,7 +27,7 @@ public class Team {
 		return teamName;
 	}
 
-	public List<UserVO> getTeamUsers() {
+	public List<User> getTeamUsers() {
 		return teamUsers;
 	}
 	

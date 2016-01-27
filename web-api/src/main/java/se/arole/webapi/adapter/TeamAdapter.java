@@ -14,7 +14,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import se.arole.api.resource.Team;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 
 public class TeamAdapter implements JsonSerializer<Team>, JsonDeserializer<Team> {
 
@@ -26,7 +26,7 @@ public class TeamAdapter implements JsonSerializer<Team>, JsonDeserializer<Team>
 		Integer teamId = jsonObject.get("teamId").getAsInt();
 		String teamName = jsonObject.get("teamName").getAsString();
 
-		List<UserVO> teamUsers = new ArrayList<>();
+		List<User> teamUsers = new ArrayList<>();
 		jsonObject.get("teamUsers").getAsJsonArray().forEach(tu -> {
 			teamUsers.add(JSON_MAPPER.jasonToUser(tu));
 		});

@@ -6,10 +6,10 @@ import se.arole.api.adapter.TeamAdapter;
 import se.arole.api.adapter.UserAdapter;
 import se.arole.api.adapter.WorkItemAdapter;
 import se.arole.api.resource.Team;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 import se.arole.datalayer.service.WorkItemService;
 
@@ -41,10 +41,10 @@ public class WorkItemController {
 
 	}
 
-	public void addWorkItemToUser(WorkItem workItem, UserVO user) {
+	public void addWorkItemToUser(WorkItem workItem, User user) {
 
 		WorkItemJPA workJPA = WorkItemAdapter.toWorkItemDb(workItem);
-		User userJPA = UserAdapter.toUserDb(user);
+		UserJPA userJPA = UserAdapter.toUserDb(user);
 		workItemService.addWorkItemToUser(workJPA, userJPA);
 	}
 
@@ -56,9 +56,9 @@ public class WorkItemController {
 
 	}
 
-	public List<WorkItem> workItembyUser(UserVO userVO) {
+	public List<WorkItem> workItembyUser(User userVO) {
 		
-		User userJPA = UserAdapter.toUserDb(userVO);
+		UserJPA userJPA = UserAdapter.toUserDb(userVO);
 		List<WorkItemJPA> workListJPA = workItemService.workItembyUser(userJPA);
 
 		return WorkItemAdapter.fromDbWorkList(workListJPA);
