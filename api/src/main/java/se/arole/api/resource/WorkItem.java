@@ -3,21 +3,26 @@ package se.arole.api.resource;
 import java.util.List;
 
 public class WorkItem {
-	
+
 	int workItemId;
 	String description, header;
-	List<User> users;
 	List<Issue> assignedIssues;
 	User assignedUser;
-	
-	public WorkItem(Integer workItemId, String decsription, String header, User assignedUser, List<User> users, List<Issue> issues){
+
+	public WorkItem(Integer workItemId, String decsription, String header, User assignedUser, List<Issue> issues) {
 		this.workItemId = workItemId;
 		this.description = decsription;
 		this.header = header;
 		this.assignedUser = assignedUser;
-		this.users = users;
 		this.assignedIssues = issues;
-		
+
+	}
+
+	public WorkItem(int workItemId, String description, String header, List<Issue> assignedIssues) {
+		this.workItemId = workItemId;
+		this.description = description;
+		this.header = header;
+		this.assignedIssues = assignedIssues;
 	}
 
 	public long getWorkItemId() {
@@ -44,14 +49,6 @@ public class WorkItem {
 		this.header = header;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
 	public List<Issue> getAssignedIssues() {
 		return assignedIssues;
 	}
@@ -67,6 +64,5 @@ public class WorkItem {
 	public void setAssignedUser(User assignedUser) {
 		this.assignedUser = assignedUser;
 	}
-	
 
 }

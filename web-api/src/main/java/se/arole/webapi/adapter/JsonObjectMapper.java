@@ -40,19 +40,19 @@ public class JsonObjectMapper {
 
 		json.add("assignedUser", userToJason(assignedUser));
 
-		JsonArray users = new JsonArray();
-		workItemVO.getUsers().forEach(user -> {
-			users.add(userToJason(user));
-		});
+//		JsonArray users = new JsonArray();
+//		workItemVO.getUsers().forEach(user -> {
+//			users.add(userToJason(user));
+//		});
 
-		json.add("users", users);
+//		json.add("users", users);
 
 		JsonArray assignedIssues = new JsonArray();
 		workItemVO.getAssignedIssues().forEach(issue -> {
 			assignedIssues.add(issueToJason(issue));
 		});
 
-		json.add("users", users);
+//		json.add("users", users);
 
 		return json;
 
@@ -74,23 +74,23 @@ public class JsonObjectMapper {
 		int workItemId = workItemJson.get("workItemId").getAsInt();
 		String description = workItemJson.get("description").getAsString();
 		String header = workItemJson.get("header").getAsString();
-		List<User> usersVO = new ArrayList<>();
-		List<Issue> assignedIssues = new ArrayList<>();
 		User assignedUser = jasonToUser(workItemJson.get("assignedUser"));
 
-		JsonArray usersJson = workItemJson.get("users").getAsJsonArray();
-		usersJson.forEach(e -> {
+		//		List<User> usersVO = new ArrayList<>();
+//		JsonArray usersJson = workItemJson.get("users").getAsJsonArray();
+//		usersJson.forEach(e -> {
+//
+//			User userVO = jasonToUser(e.getAsJsonObject());
+//			usersVO.add(userVO);
+//		});
 
-			User userVO = jasonToUser(e.getAsJsonObject());
-			usersVO.add(userVO);
-		});
-
+		List<Issue> assignedIssues = new ArrayList<>();
 		JsonArray issuesJson = workItemJson.get("assignedIssues").getAsJsonArray();
 		issuesJson.forEach(e -> {
 			assignedIssues.add(jasonToIssue(e));
 		});
 
-		return new WorkItem(workItemId, description, header, assignedUser, usersVO, assignedIssues);
+		return new WorkItem(workItemId, description, header, assignedUser, assignedIssues);
 
 	}
 

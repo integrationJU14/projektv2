@@ -17,13 +17,12 @@ public class WorkItemAdapter {
 		Integer itemId = (int) workItem.getWorkItemId();
 		String description = workItem.getDescription();
 		String status = "";
-		UserJPA solver = new UserJPA("","", status, 0, false);
 		List<IssueJPA> issue = new ArrayList<IssueJPA>();
-
-		if (workItem.getAssignedUser() != null)
-			solver = UserAdapter.toUserDb(workItem.getAssignedUser());
-
-		return new WorkItemJPA(itemId, description, status, solver, issue);
+		if (workItem.getAssignedUser() != null) {
+			UserJPA solver = UserAdapter.toUserDb(workItem.getAssignedUser());
+			return new WorkItemJPA(itemId, description, status, solver, issue);
+		}
+		return new WorkItemJPA(itemId, description, status, issue);
 	}
 
 	public static WorkItem fromWorkItemDb(WorkItemJPA workItemJPA) {
@@ -31,12 +30,14 @@ public class WorkItemAdapter {
 		int workItemId = workItemJPA.getItemId();
 		String description = workItemJPA.getDescription();
 		String header = "";
-		List<User> users = new ArrayList<User>();
+//		List<User> users = new ArrayList<User>();
 		List<Issue> assignedIssues = null;
 		User assignedUser = new User(0, false, "", "", "");
-		if (workItemJPA.getSolver() != null)
+		if (workItemJPA.getSolver() != null) {
 			assignedUser = UserAdapter.fromUserDb(workItemJPA.getSolver());
-		return new WorkItem(workItemId, description, header, assignedUser, users, assignedIssues);
+			return new WorkItem(workItemId, description, header, assignedUser, assignedIssues);
+		}
+		return new WorkItem(workItemId, description, header, assignedIssues);
 	}
 
 	public static List<WorkItemJPA> toDbWorkList(List<WorkItem> workItemVOList) {

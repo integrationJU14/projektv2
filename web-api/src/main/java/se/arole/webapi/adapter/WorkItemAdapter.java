@@ -11,17 +11,15 @@ import com.google.gson.JsonSerializer;
 
 import se.arole.api.resource.WorkItem;
 
+public final class WorkItemAdapter implements JsonSerializer<WorkItem>, JsonDeserializer<WorkItem> {
 
-public final class WorkItemAdapter 
-implements JsonSerializer<WorkItem>, JsonDeserializer<WorkItem> {
-	
-	JsonObjectMapper mapper;
+	private static final JsonObjectMapper mapper = new JsonObjectMapper();
 
 	// JsonSerializer
 	@Override
 	public JsonElement serialize(WorkItem workItem, Type typeOfSrc, JsonSerializationContext context) {
-		return	mapper.workItemVOToJson(workItem);	
-		 
+		return mapper.workItemVOToJson(workItem);
+
 	}
 
 	// JsonDeserializer
@@ -31,6 +29,5 @@ implements JsonSerializer<WorkItem>, JsonDeserializer<WorkItem> {
 
 		return mapper.jsonToWorkItemVO(json);
 
-		
 	}
 }
