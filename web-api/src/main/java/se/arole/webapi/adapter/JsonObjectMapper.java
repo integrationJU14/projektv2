@@ -20,7 +20,7 @@ public class JsonObjectMapper {
 		json.addProperty("firstName", user.getFirstName());
 		json.addProperty("lastName", user.getLastName());
 		json.addProperty("userName", user.getUserName());
-		json.addProperty("isActive", user.isActive());
+		json.addProperty("active", user.isActive());
 		return json;
 	}
 
@@ -31,7 +31,7 @@ public class JsonObjectMapper {
 		String firstName = userJson.get("firstName").getAsString();
 		String lastName = userJson.get("lastName").getAsString();
 
-		boolean isActive = userJson.get("isActive").getAsString() != null;
+		boolean isActive = userJson.get("active").getAsString() != null;
 
 		return new User(id, isActive, userName, firstName, lastName);
 	}
