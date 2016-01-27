@@ -23,13 +23,15 @@ public enum Status {
 	 * @return
 	 */
 	public static Status fromString(String status) {
+		if (status == null) {
+			return Status.TO_DO;
+		}if (status.equals("")) {
+			return Status.TO_DO;
+		}
 		for (Status s : Status.values()) {
 			if (s.getStatus().equalsIgnoreCase(status)) {
 				return s;
 			}
-		}
-		if (status.equals("") || status == null) {
-			return Status.TO_DO;
 		}
 		throw new IllegalArgumentException("No status with name " + status + " exists");
 	}

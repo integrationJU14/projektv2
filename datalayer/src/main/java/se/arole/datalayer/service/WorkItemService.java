@@ -15,6 +15,8 @@ public interface WorkItemService {
 
 	void addWorkItemToUser(WorkItemJPA workItem, UserJPA user);
 
+	void addWorkItemToUser(Integer id, UserJPA user);
+
 	List<WorkItemJPA> workItemByStatus(String status);
 
 	List<WorkItemJPA> workItembyUser(UserJPA user);
@@ -26,4 +28,6 @@ public interface WorkItemService {
 	List<WorkItemJPA> getAll();
 
 	WorkItemJPA findByItemId(int itemId);
+
+	void deleteWorkItem(Integer itemId);
 }

@@ -34,7 +34,6 @@ public class WorkItemController {
 	}
 
 	public void changeStatusWorkItem(String status, Integer workItemId) {
-
 		workItemService.changeStatusWorkItem(status, workItemId);
 
 	}
@@ -55,7 +54,7 @@ public class WorkItemController {
 	}
 
 	public List<WorkItem> workItembyUser(User userVO) {
-		
+
 		UserJPA userJPA = UserAdapter.toUserDb(userVO);
 		List<WorkItemJPA> workListJPA = workItemService.workItembyUser(userJPA);
 
@@ -79,10 +78,9 @@ public class WorkItemController {
 		return WorkItemAdapter.fromDbWorkList(workListJPA);
 
 	}
-	
+
 	public WorkItem findByItemId(int itemId) {
 
-	
 		WorkItemJPA workItem = workItemService.findByItemId(itemId);
 
 		return WorkItemAdapter.fromWorkItemDb(workItem);
@@ -94,6 +92,10 @@ public class WorkItemController {
 		List<WorkItemJPA> workListJPA = workItemService.getAll();
 
 		return WorkItemAdapter.fromDbWorkList(workListJPA);
+	}
+
+	public void remove(Integer id) {
+		workItemService.deleteWorkItem(id);
 	}
 
 }
