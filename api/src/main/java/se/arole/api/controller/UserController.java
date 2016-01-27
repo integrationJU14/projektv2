@@ -12,10 +12,8 @@ import se.arole.api.resource.UserVO;
 import se.arole.datalayer.entity.User;
 import se.arole.datalayer.service.UserService;
 
-//@Controller
 public final class UserController {
 
-//	@Autowired
 	private UserService userService;
 
 	public UserController(UserService userService) {
