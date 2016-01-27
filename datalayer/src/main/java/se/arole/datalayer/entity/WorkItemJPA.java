@@ -22,7 +22,7 @@ public class WorkItemJPA implements Serializable{
 	@Column(unique=true)
 	Integer itemId;
 	String description;
-	String status;
+	String status=Status.TO_DO.toString();
 	@ManyToOne
     @JoinColumn(name = "fk_user_id")
 	User solver;

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import se.arole.api.adapter.IssueAdapter;
 import se.arole.api.adapter.UserAdapter;
 import se.arole.api.resource.Issue;
@@ -12,9 +14,11 @@ import se.arole.api.resource.WorkItem;
 import se.arole.datalayer.entity.IssueJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 import se.arole.datalayer.service.IssueService;
+import se.arole.datalayer.serviceImp.TeamServiceImpl;
 
 public final class IssueController {
 
+	@Autowired
 	private IssueService issueService;
 
 	public IssueController(IssueService issueService) {

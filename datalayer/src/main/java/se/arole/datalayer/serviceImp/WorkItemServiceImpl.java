@@ -24,9 +24,9 @@ public class WorkItemServiceImpl implements WorkItemService {
 
 	}
 
-	public void changeStatusWorkItem(Status status, Integer workItemId) {
+	public void changeStatusWorkItem(String status, Integer workItemId) {
 		WorkItemJPA workItem = repository.findByItemId(workItemId);
-		workItem.setStatus(status.toString());
+		workItem.setStatus(status);
 		repository.save(workItem);
 
 	}
@@ -36,8 +36,8 @@ public class WorkItemServiceImpl implements WorkItemService {
 		repository.save(workItem);
 	}
 
-	public List<WorkItemJPA> workItemByStatus(Status status) {
-		return repository.findByStatus(status.toString());
+	public List<WorkItemJPA> workItemByStatus(String status) {
+		return repository.findByStatus(status);
 
 	}
 
@@ -63,6 +63,17 @@ public class WorkItemServiceImpl implements WorkItemService {
 		}
 		return workItems;
 
+	}
+
+	public WorkItemJPA findByItemId(int itemId) {
+		return repository.findByItemId(itemId);
+
+	}
+
+	@Override
+	public List<WorkItemJPA> getAll() {
+
+		return (List<WorkItemJPA>) repository.findAll();
 	}
 
 }
