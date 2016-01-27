@@ -25,8 +25,9 @@ public class UserAdapter {
 		String userName = userDb.getUserName();
 		String firstName = userDb.getFirstName();
 		String lastName = userDb.getLastName();
+		boolean isActive = userDb.isActive();
 
-		return new User(id, true, userName, firstName, lastName);
+		return new User(id, isActive, userName, firstName, lastName);
 	}
 	
 	public static List<UserJPA> toDbUserList(List<User> userList){

@@ -66,5 +66,14 @@ public UserJPA() {}
 				+ userId + ", isActive=" + isActive + "]";
 
 	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	
 }
