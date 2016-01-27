@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.springframework.context.ApplicationContext;
@@ -57,7 +59,7 @@ public class WorkItemResource {
 	}
 
 	@POST
-	public Response addWorkItem(WorkItem workItem) {
+	public Response createWorkItem(WorkItem workItem) {
 		WorkItem createWorkItem = workItemController.createWorkItem(workItem);
 		URI location = uriInfo.getAbsolutePathBuilder().path(createWorkItem.getWorkItemId() + "").build();
 		return Response.created(location).build();
@@ -70,19 +72,14 @@ public class WorkItemResource {
 		return Response.ok(work).build();
 	}
 
-	// @PUT
-	// @Path("{id}")
-	// @Consumes(MediaType.TEXT_PLAIN)
-	// @Produces(MediaType.TEXT_PLAIN)
-	// public Response changeStatusWorkItem(@QueryParam("status")
-	// @DefaultValue("TO_DO") String status,
-	// @PathParam("id") Integer id) {
-	// workItemController.changeStatusWorkItem(status, id);
-	//
-	// return Response.status(Status.ACCEPTED).header("status changed ", "work/"
-	// + id).build();
-	// }
-	//
+	@PUT
+	@Path("{id}")
+	public Response changeStatusOnWorkItem(@PathParam("id") Integer id, @QueryParam("status") String status) {
+		workItemController.changeStatusWorkItem(status, id);
+
+		return Response.status(Status.ACCEPTED).header("status changed ", "work/" + id).build();
+	}
+
 	// @PUT
 	// @Path("{id}")
 	// @Consumes(MediaType.APPLICATION_JSON)

@@ -18,12 +18,10 @@ public class WorkItemController {
 	private WorkItemService workItemService;
 
 	public WorkItemController(WorkItemService workItemService) {
-
 		this.workItemService = workItemService;
 	}
 
 	public WorkItemController() {
-
 	}
 
 	public WorkItem createWorkItem(WorkItem workItem) {

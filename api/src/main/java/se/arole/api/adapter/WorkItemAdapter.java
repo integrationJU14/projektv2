@@ -7,6 +7,7 @@ import se.arole.api.resource.Issue;
 import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 import se.arole.datalayer.entity.IssueJPA;
+import se.arole.datalayer.entity.Status;
 import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 
@@ -16,7 +17,7 @@ public class WorkItemAdapter {
 		// TODO status & issue ???
 		Integer itemId = (int) workItem.getWorkItemId();
 		String description = workItem.getDescription();
-		String status = "";
+		String status = workItem.getStatus().toString();
 		List<IssueJPA> issue = new ArrayList<IssueJPA>();
 		if (workItem.getAssignedUser() != null) {
 			UserJPA solver = UserAdapter.toUserDb(workItem.getAssignedUser());
@@ -30,14 +31,14 @@ public class WorkItemAdapter {
 		int workItemId = workItemJPA.getItemId();
 		String description = workItemJPA.getDescription();
 		String header = "";
-//		List<User> users = new ArrayList<User>();
+		Status status = Status.fromString(workItemJPA.getStatus());
 		List<Issue> assignedIssues = null;
 		User assignedUser = new User(0, false, "", "", "");
 		if (workItemJPA.getSolver() != null) {
 			assignedUser = UserAdapter.fromUserDb(workItemJPA.getSolver());
-			return new WorkItem(workItemId, description, header, assignedUser, assignedIssues);
+			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
 		}
-		return new WorkItem(workItemId, description, header, assignedIssues);
+		return new WorkItem(workItemId, description, status, header, assignedIssues);
 	}
 
 	public static List<WorkItemJPA> toDbWorkList(List<WorkItem> workItemVOList) {

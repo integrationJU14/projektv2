@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import se.arole.api.resource.Issue;
 import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
+import se.arole.datalayer.entity.Status;
 
 public class JsonObjectMapper {
 
@@ -35,21 +36,24 @@ public class JsonObjectMapper {
 		return new User(id, isActive, userName, firstName, lastName);
 	}
 
-	public JsonElement workItemVOToJson(WorkItem workItemVO) {
+	public JsonElement workItemVOToJson(WorkItem workItem) {
 
 		JsonObject json = new JsonObject();
-		json.addProperty("workItemId", workItemVO.getWorkItemId());
-		json.addProperty("description", workItemVO.getDescription());
-		json.addProperty("header", workItemVO.getHeader());
+		json.addProperty("workItemId", workItem.getWorkItemId());
+		json.addProperty("description", workItem.getDescription());
+		json.addProperty("header", workItem.getHeader());
 
-		User assignedUser = workItemVO.getAssignedUser();
+		User assignedUser = workItem.getAssignedUser();
 
 		json.add("assignedUser", userToJason(assignedUser));
 
 		JsonArray assignedIssues = new JsonArray();
-		workItemVO.getAssignedIssues().forEach(issue -> {
-			assignedIssues.add(issueToJason(issue));
-		});
+		if (workItem.getAssignedIssues()!=null ) {
+			workItem.getAssignedIssues().forEach(issue -> {
+				assignedIssues.add(issueToJason(issue));
+			});
+		}
+		json.addProperty("status", workItem.getStatus().toString());
 
 		return json;
 
@@ -65,21 +69,33 @@ public class JsonObjectMapper {
 		return jsonIssue;
 	}
 
-	public WorkItem jsonToWorkItemVO(JsonElement json) {
+	public WorkItem jsonToWorkItem(JsonElement json) {
 
 		JsonObject workItemJson = json.getAsJsonObject();
+
 		int workItemId = workItemJson.get("workItemId").getAsInt();
 		String description = workItemJson.get("description").getAsString();
 		String header = workItemJson.get("header").getAsString();
-		User assignedUser = jsonToUser(workItemJson.get("assignedUser"));
+
+		JsonElement jsonElement = workItemJson.get("status");
+		Status status = Status.TO_DO;
+		if (jsonElement != null) {
+			status = Status.fromString(jsonElement.getAsString());
+		}
 
 		List<Issue> assignedIssues = new ArrayList<>();
 		JsonArray issuesJson = workItemJson.get("assignedIssues").getAsJsonArray();
 		issuesJson.forEach(e -> {
 			assignedIssues.add(jasonToIssue(e));
 		});
-
-		return new WorkItem(workItemId, description, header, assignedUser, assignedIssues);
+		
+		JsonElement json2 = workItemJson.get("assignedUser");
+		if (json2 != null) {
+			User assignedUser = jsonToUser(json2);
+			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
+		}
+		
+		return new WorkItem(workItemId, description, status, header, assignedIssues);
 	}
 
 	public Issue jasonToIssue(JsonElement e) {

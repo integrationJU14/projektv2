@@ -27,7 +27,7 @@ public final class WorkItemAdapter implements JsonSerializer<WorkItem>, JsonDese
 	public WorkItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
-		return mapper.jsonToWorkItemVO(json);
+		return mapper.jsonToWorkItem(json);
 
 	}
 }
