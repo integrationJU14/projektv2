@@ -9,15 +9,13 @@ import se.arole.datalayer.entity.UserJPA;
 public class UserAdapter {
 
 	public static UserJPA toUserDb(User user) {
+		Integer id = user.getUserId();
 		String userName = user.getUserName();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
 		boolean isActive = user.isActive();
 
-		// TODO: Check Integer/Long as UserId
-		Integer userId = (int) user.getUserId();
-
-		return new UserJPA(userName, firstName, lastName, userId, isActive);
+		return new UserJPA(userName, firstName, lastName, id, isActive);
 	}
 
 	public static User fromUserDb(UserJPA userDb) {
@@ -29,16 +27,17 @@ public class UserAdapter {
 
 		return new User(id, isActive, userName, firstName, lastName);
 	}
-	
-	public static List<UserJPA> toDbUserList(List<User> userList){
+
+	public static List<UserJPA> toDbUserList(List<User> userList) {
+
 		List<UserJPA> userListToDb = new ArrayList<UserJPA>();
 		userList.forEach(u -> {
 			userListToDb.add(toUserDb(u));
 		});
 		return userListToDb;
 	}
-	
-	public static List<User> fromDbUserList(List<UserJPA> userList){
+
+	public static List<User> fromDbUserList(List<UserJPA> userList) {
 		List<User> userListFromDb = new ArrayList<User>();
 		userList.forEach(u -> {
 			userListFromDb.add(fromUserDb(u));
