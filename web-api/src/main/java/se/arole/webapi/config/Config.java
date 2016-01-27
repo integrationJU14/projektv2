@@ -1,14 +1,7 @@
 package se.arole.webapi.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
-import se.arole.api.controller.TeamController;
-import se.arole.api.controller.UserController;
-import se.arole.datalayer.service.TeamService;
-import se.arole.datalayer.serviceImp.TeamServiceImpl;
-import se.arole.datalayer.serviceImp.UserServiceImp;
-import se.arole.webapi.resources.UserResource;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +13,17 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import se.arole.api.controller.IssueController;
+import se.arole.api.controller.TeamController;
+import se.arole.api.controller.UserController;
+import se.arole.api.controller.WorkItemController;
+import se.arole.datalayer.serviceImp.IssueServiceImpl;
+import se.arole.datalayer.serviceImp.TeamServiceImpl;
+import se.arole.datalayer.serviceImp.UserServiceImp;
+import se.arole.datalayer.serviceImp.WorkItemServiceImpl;
 
 @Configuration
 @EnableJpaRepositories("se.arole.datalayer.repository")
@@ -29,22 +31,42 @@ import javax.sql.DataSource;
 public class Config {
 
 	@Bean
+	public IssueController issueController() {
+		return new IssueController(issueService());
+	}
+
+	@Bean
+	public IssueServiceImpl issueService() {
+		return new IssueServiceImpl();
+	}
+
+	@Bean
+	public WorkItemServiceImpl workItemServiceImpl() {
+		return new WorkItemServiceImpl();
+	}
+
+	@Bean
+	public WorkItemController WorkItemController() {
+		return new WorkItemController(workItemServiceImpl());
+	}
+
+	@Bean
 	public TeamController teamController() {
-		return new TeamController();
+		return new TeamController(teamService());
 	}
 
 	@Bean
-	public UserController userController() {
-		return new UserController(userServce());
-	}
-
-	@Bean
-	public TeamServiceImpl TeamService() {
+	public TeamServiceImpl teamService() {
 		return new TeamServiceImpl();
 	}
 
 	@Bean
-	public UserServiceImp userServce() {
+	public UserController userController() {
+		return new UserController(userService());
+	}
+
+	@Bean
+	public UserServiceImp userService() {
 		return new UserServiceImp();
 	}
 
@@ -56,7 +78,7 @@ public class Config {
 		config.setDriverClassName("com.mysql.jdbc.Driver");
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/arole");
 		config.setUsername("root");
-		config.setPassword("letmein");
+		config.setPassword("vampyre");
 
 		return new HikariDataSource(config);
 	}
