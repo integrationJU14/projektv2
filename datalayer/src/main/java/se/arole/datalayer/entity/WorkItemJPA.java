@@ -25,7 +25,7 @@ public class WorkItemJPA implements Serializable{
 	String status=Status.TO_DO.toString();
 	@ManyToOne
     @JoinColumn(name = "fk_user_id")
-	User solver;
+	UserJPA solver;
 	@OneToMany
     @JoinColumn(name = "fk_workItem_id")
 	List<IssueJPA> issue;
@@ -39,7 +39,7 @@ public class WorkItemJPA implements Serializable{
 		this.status = status;
 	}
 	
-	public WorkItemJPA(Integer itemId, String description, String status, User solver, List<IssueJPA> issue) {
+	public WorkItemJPA(Integer itemId, String description, String status, UserJPA solver, List<IssueJPA> issue) {
 		super();
 		this.itemId = itemId;
 		this.description = description;
@@ -65,10 +65,10 @@ public class WorkItemJPA implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public User getSolver() {
+	public UserJPA getSolver() {
 		return solver;
 	}
-	public void setSolver(User solver) {
+	public void setSolver(UserJPA solver) {
 		this.solver = solver;
 	}
 	public List<IssueJPA> getIssue() {

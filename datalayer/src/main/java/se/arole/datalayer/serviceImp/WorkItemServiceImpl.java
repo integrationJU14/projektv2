@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import se.arole.datalayer.entity.Status;
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 import se.arole.datalayer.repository.WorkItemRepository;
 import se.arole.datalayer.service.WorkItemService;
@@ -31,7 +31,7 @@ public class WorkItemServiceImpl implements WorkItemService {
 
 	}
 
-	public void addWorkItemToUser(WorkItemJPA workItem, User user) {
+	public void addWorkItemToUser(WorkItemJPA workItem, UserJPA user) {
 		workItem.setSolver(user);
 		repository.save(workItem);
 	}
@@ -41,14 +41,14 @@ public class WorkItemServiceImpl implements WorkItemService {
 
 	}
 
-	public List<WorkItemJPA> workItembyUser(User user) {
+	public List<WorkItemJPA> workItembyUser(UserJPA user) {
 		return repository.findBySolver(user);
 	}
 
 	public List<WorkItemJPA> workItemsByTeam(TeamJPA team) {
 		List<WorkItemJPA> workItems = new ArrayList<>();
 
-		for (User user : team.getUsers()) {
+		for (UserJPA user : team.getUsers()) {
 			workItems.addAll(repository.findBySolver(user));
 		}
 		return workItems;
