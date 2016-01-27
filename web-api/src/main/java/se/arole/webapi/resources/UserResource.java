@@ -19,9 +19,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.google.gson.JsonObject;
-
+import javax.ws.rs.QueryParam;
 import se.arole.api.controller.UserController;
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 import se.arole.webapi.config.Config;
 
 @Path("user")
@@ -45,16 +45,35 @@ public final class UserResource {
 	}
 
 	@GET
-	public Response getAll() {
-		Collection<UserVO> all = userController.getAll();
-		GenericEntity<Collection<UserVO>> result = new GenericEntity<Collection<UserVO>>(all) {
-		};
-		return Response.ok(result).build();
+	public Response getAll(@QueryParam("userName") String userName, @QueryParam("firstName") String firstName,
+			@QueryParam("lastName") String lastName) {
+
+		if (userName == null && firstName == null && lastName == null) {
+			Collection<User> all = userController.getAll();
+			GenericEntity<Collection<User>> result = new GenericEntity<Collection<User>>(all) {
+			};
+			return Response.ok(result).build();
+		}
+		if (userName != null) {
+			User user = userController.getUserByUsername(userName);
+			return Response.ok(user).build();
+		}
+		if (firstName != null) {
+			User user = userController.getUserByFirstname(firstName);
+			return Response.ok(user).build();
+		}
+		if (lastName != null) {
+			User user = userController.getUserByLastname(lastName);
+			return Response.ok(user).build();
+		}
+
+		return Response.noContent().build();
+
 	}
 
 	@POST
-	public Response createUser(UserVO user) {
-		UserVO createdUser = userController.create(user);
+	public Response createUser(User user) {
+		User createdUser = userController.create(user);
 		URI location = uriInfo.getAbsolutePathBuilder().path("" + createdUser.getUserId()).build();
 
 		return Response.created(location).build();
@@ -74,7 +93,7 @@ public final class UserResource {
 	@GET
 	@Path("{id}")
 	public Response getUser(@PathParam("id") Integer id) {
-		UserVO user = userController.getUser(id);
+		User user = userController.getUser(id);
 
 		return Response.ok(user).build();
 	}

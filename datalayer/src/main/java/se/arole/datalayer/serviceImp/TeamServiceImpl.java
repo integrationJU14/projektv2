@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.repository.TeamRepository;
 import se.arole.datalayer.service.TeamService;
 
@@ -42,15 +42,15 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public void addUserToTeam(User user, int teamId) {
-		List<User> users;
+	public void addUserToTeam(UserJPA user, int teamId) {
+		List<UserJPA> users;
 
 		TeamJPA team = teamRepository.findByTeamId(teamId);
 
 		if (team.getUsers() != null)
 			users = team.getUsers();
 		else
-			users = new ArrayList<User>();
+			users = new ArrayList<UserJPA>();
 
 		users.add(user);
 		team.setUsers(users);

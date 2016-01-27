@@ -37,7 +37,7 @@ public class Config {
         config.setDriverClassName("com.mysql.jdbc.Driver");
         config.setJdbcUrl("jdbc:mysql://localhost:3306/arole");
         config.setUsername("root");
-        config.setPassword("letmein");
+        config.setPassword("vampyr");
 
         return new HikariDataSource(config);
     }

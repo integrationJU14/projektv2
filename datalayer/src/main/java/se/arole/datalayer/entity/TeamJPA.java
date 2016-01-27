@@ -20,7 +20,7 @@ public class TeamJPA {
 	@Column(unique = true)
 	private Integer teamId;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<User> users;
+	private List<UserJPA> users;
 
 	public TeamJPA() {
 
@@ -31,7 +31,7 @@ public class TeamJPA {
 		this.teamId = teamId;
 	}
 
-	public TeamJPA(String name, Integer teamId, List<User> users) {
+	public TeamJPA(String name, Integer teamId, List<UserJPA> users) {
 		this.name = name;
 		this.teamId = teamId;
 		this.users = users;
@@ -53,11 +53,11 @@ public class TeamJPA {
 		this.teamId = teamId;
 	}
 
-	public List<User> getUsers() {
+	public List<UserJPA> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(List<UserJPA> users) {
 		this.users = users;
 	}
 

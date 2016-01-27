@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.repository.UserRepository;
 import se.arole.datalayer.service.UserService;
 
@@ -26,17 +26,16 @@ public class UserServiceImp implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	public UserServiceImp() {
-	}
+	public UserServiceImp() {}
 
 	@Override
-	public User createUser(User user) {
+	public UserJPA createUser(UserJPA user) {
 		return userRepository.save(user);
 	}
 
 	@Override
-	public User updateUser(User user, Integer userId) {
-		User tempUser = userRepository.findByUserId(userId);
+	public UserJPA updateUser(UserJPA user, Integer userId) {
+		UserJPA tempUser = userRepository.findByUserId(userId);
 		userRepository.delete(tempUser.getId());
 		tempUser = user;
 		return userRepository.save(tempUser);
@@ -44,29 +43,52 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public void changeStatusUser(boolean isActive, Integer userId) {
-		User tempUser = userRepository.findByUserId(userId);
+		UserJPA tempUser = userRepository.findByUserId(userId);
 		userRepository.delete(tempUser.getId());
-		userRepository.save(new User(tempUser.getName(), tempUser.getUserId(), isActive));
+		userRepository.save(new UserJPA(tempUser.getUserName(),tempUser.getFirstName(),tempUser.getLastName(), tempUser.getUserId(), isActive));
+
 
 	}
 
 	@Override
-	public User getUser(Integer userId) {
+	public UserJPA getUser(Integer userId) {
 		return userRepository.findByUserId(userId);
 	}
 
 	@Override
-	public User getUserByUsername(String userName) {
-		List<User> users = (List<User>) userRepository.findAll();
-		return users.stream().filter(user -> user.getName().contains(userName)).findFirst().orElse(null);
+	public UserJPA getUserByUsername(String username) {
+		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
+		return users.stream().filter(user -> user.getUserName().equals(username)).findFirst().orElse(null);
+	}
+	
+
+	@Override
+	public UserJPA getUserByFirstname(String firstname) {
+		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
+		return users.stream().filter(user -> user.getFirstName().equals(firstname)).findFirst().orElse(null);
 	}
 
 	@Override
-	public Collection<User> getAll() {
-		Iterable<User> findAll = userRepository.findAll();
-		Collection<User> users = new ArrayList<>();
+	public UserJPA getUserByLastname(String lastname) {
+		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
+		return users.stream().filter(user -> user.getLastName().equals(lastname)).findFirst().orElse(null);
+	}
+
+
+	@Override
+	public Collection<UserJPA> getAll() {
+		Iterable<UserJPA> findAll = userRepository.findAll();
+		Collection<UserJPA> users = new ArrayList<>();
 		findAll.forEach(u -> users.add(u));
 		return users;
+	}
+	
+	@Override
+	public Collection<UserJPA> getAllByName(UserJPA user) {
+		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
+		List<UserJPA> match = new ArrayList<UserJPA>();
+		
+		return null;
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 
 public class MemoryUserResource {
 //	

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import se.arole.api.adapter.TeamAdapter;
 import se.arole.api.resource.Team;
 import se.arole.datalayer.entity.TeamJPA;
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.service.TeamService;
 import se.arole.datalayer.service.UserService;
 import se.arole.datalayer.serviceImp.TeamServiceImpl;
@@ -48,7 +48,7 @@ public class TeamController {
 	}
 
 	public void addUser(Integer teamId, Integer userId) {
-		User user = userService.getUser(userId);
+		UserJPA user = userService.getUser(userId);
 		teamService.addUserToTeam(user, teamId);
 	}
 }

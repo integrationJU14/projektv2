@@ -2,8 +2,8 @@ package se.arole.datalayer.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import se.arole.datalayer.entity.User;
+import se.arole.datalayer.entity.UserJPA;
 
-public interface UserRepository extends CrudRepository <User, Long> {
-	User findByUserId(Integer userId);
+public interface UserRepository extends CrudRepository <UserJPA, Long> {
+	UserJPA findByUserId(Integer userId);
 }

@@ -10,16 +10,18 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import se.arole.api.resource.UserVO;
+import se.arole.api.resource.User;
 
-public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializer<UserVO> {
+public final class UserAdapter implements JsonSerializer<User>, JsonDeserializer<User> {
 
 	// JsonSerializer
 	@Override
-	public JsonElement serialize(UserVO user, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(User user, Type typeOfSrc, JsonSerializationContext context) {
 
 		JsonObject json = new JsonObject();
 		json.addProperty("userId", user.getUserId());
+		json.addProperty("firstName", user.getFirstName());
+		json.addProperty("lastName", user.getLastName());
 		json.addProperty("userName", user.getUserName());
 		json.addProperty("isActive", user.isActive());
 
@@ -28,14 +30,17 @@ public final class UserAdapter implements JsonSerializer<UserVO>, JsonDeserializ
 
 	// JsonDeserializer
 	@Override
-	public UserVO deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+	public User deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
 		JsonObject userJson = json.getAsJsonObject();
 		Integer id = userJson.get("userId").getAsInt();
-		String username = userJson.get("userName").getAsString();
+		String userName = userJson.get("userName").getAsString();
+		String firstName = userJson.get("firstName").getAsString();
+		String lastName = userJson.get("lastName").getAsString();
+
 		boolean isActive = userJson.get("isActive").getAsString() != null;
 
-		return new UserVO(id, isActive, username, "", "");
+		return new User(id, isActive, userName, firstName, lastName);
 	}
 }
