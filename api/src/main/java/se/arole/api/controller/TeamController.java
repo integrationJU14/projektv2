@@ -51,4 +51,9 @@ public class TeamController {
 		UserJPA user = userService.getUser(userId);
 		teamService.addUserToTeam(user, teamId);
 	}
+
+	public void deleteTeam(Integer teamId) {
+		teamService.deleteTeam(teamId);
+		
+	}
 }

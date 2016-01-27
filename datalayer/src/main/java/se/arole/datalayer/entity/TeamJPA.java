@@ -19,7 +19,7 @@ public class TeamJPA {
 	private String name;
 	@Column(unique = true)
 	private Integer teamId;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<UserJPA> users;
 
 	public TeamJPA() {

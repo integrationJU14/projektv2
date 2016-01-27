@@ -4,12 +4,14 @@ import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -81,11 +83,18 @@ public class TeamResource {
 	}
 
 	@POST
-	@Path("{id}")
-	public Response addUser(@PathParam("id") Integer teamId, Integer userId) {
+	@Path("{id}/add_user")
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Response addUser(@PathParam("id") Integer teamId, @QueryParam("userId")Integer userId) {
 		teamController.addUser(teamId, userId);
 		Team team = teamController.getTeam(teamId);
 		return Response.ok(team).build();
 	}
-
+	@DELETE
+	@Path("{id}")
+	public Response deleteTeam(@PathParam("id") Integer teamId) {
+		teamController.deleteTeam(teamId);
+		
+		return Response.ok(Status.OK).build();
+	}
 }
