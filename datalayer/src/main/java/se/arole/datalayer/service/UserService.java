@@ -10,9 +10,9 @@ public interface UserService {
 	UserJPA updateUser (UserJPA user, Integer userId);
 	void changeStatusUser (boolean isActive, Integer userId);
 	UserJPA getUser (Integer userId);
-	UserJPA getUserByUserName (String userName);
-	UserJPA getUserByFirstName (String firstName);
-	UserJPA getUserByLastName (String lastName);
+	UserJPA getUserByUsername (String username);
+	UserJPA getUserByFirstname (String firstname);
+	UserJPA getUserByLastname (String lastName);
 
 	Collection<UserJPA> getAll();
 	Collection<UserJPA> getAllByName(UserJPA user);

@@ -1,13 +1,11 @@
 package se.arole.webapi.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -72,56 +70,7 @@ public final class UserResource {
 		return Response.noContent().build();
 
 	}
-	
-	/*@GET
-	public Response getAll(@QueryParam("userName") String userName, @QueryParam("firstName") String firstName,
-			@QueryParam("lastName") String lastName) {
 
-		if (userName == null && firstName == null && lastName == null) {
-			Collection<User> all = userController.getAll();
-			GenericEntity<Collection<User>> result = new GenericEntity<Collection<User>>(all) {
-			};
-			return Response.ok(result).build();
-		}
-		
-		return Response.noContent().build();
-	}*/
-//
-//	@GET
-//	//@QueryParam("{searchQuery}")
-//	@Path("{searchQuery}")
-//	public Response getAllBySearchQuery(/*@QueryParam*/@PathParam("searchQuery") String searchQuery/*, @QueryParam("firstName") String firstName,
-//			@QueryParam("lastName") String lastName*/) {
-//		
-//		Collection<User> all = new ArrayList<User>();
-//		
-//		all.add(userController.getUserByUsername(searchQuery));
-//		all.add(userController.getUserByFirstname(searchQuery));
-//		all.add(userController.getUserByLastname(searchQuery));
-//		
-//		GenericEntity<Collection<User>> result = new GenericEntity<Collection<User>>(all){};
-//		
-//		return Response.ok(result).build();
-//		
-//		
-///*
-//		if (userName != null) {
-//			User user = userController.getUserByUsername(userName);
-//			return Response.ok(user).build();
-//		}
-//		if (firstName != null) {
-//			User user = userController.getUserByFirstname(firstName);
-//			return Response.ok(user).build();
-//		}
-//		if (lastName != null) {
-//			User user = userController.getUserByLastname(lastName);
-//			return Response.ok(user).build();
-//		}
-//
-//		return Response.noContent().build();
-//*/
-//	}
-//
 	@POST
 	public Response createUser(User user) {
 		User createdUser = userController.create(user);
@@ -130,16 +79,17 @@ public final class UserResource {
 		return Response.created(location).build();
 	}
 
-	@PUT
-	@Path("{id}")
-	public Response updateUser(@PathParam("id") Integer id, User user) {
-
-		userController.getUser(id);
-		User updatedUser = userController.update(id, user);
-
-		return Response.ok(updatedUser).build();
-	}
-
+	//
+	//// @PUT
+	//// @Path("{id}")
+	//// public Response updateUser(@PathParam("id") Integer id, UserVO user) {
+	////
+	//// userController.getUser(id);
+	//// UserVO updatedUser = userController.update(id, user);
+	////
+	//// return Response.ok(updatedUser).build();
+	//// }
+	//
 	@GET
 	@Path("{id}")
 	public Response getUser(@PathParam("id") Integer id) {
