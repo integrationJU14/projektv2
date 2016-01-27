@@ -24,7 +24,7 @@ public class WorkItemJPA implements Serializable {
 	String description;
 	String status;
 	@ManyToOne
-	@JoinColumn(name = "fk_user_id")
+//	@JoinColumn(name = "fk_user_id")
 	UserJPA solver;
 	@OneToMany
 	@JoinColumn(name = "fk_workItem_id")

@@ -26,7 +26,8 @@ public class UserServiceImp implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	public UserServiceImp() {}
+	public UserServiceImp() {
+	}
 
 	@Override
 	public UserJPA createUser(UserJPA user) {
@@ -45,8 +46,8 @@ public class UserServiceImp implements UserService {
 	public void changeStatusUser(boolean isActive, Integer userId) {
 		UserJPA tempUser = userRepository.findByUserId(userId);
 		userRepository.delete(tempUser.getId());
-		userRepository.save(new UserJPA(tempUser.getUserName(),tempUser.getFirstName(),tempUser.getLastName(), tempUser.getUserId(), isActive));
-
+		userRepository.save(new UserJPA(tempUser.getUserName(), tempUser.getFirstName(), tempUser.getLastName(),
+				tempUser.getUserId(), isActive));
 
 	}
 
@@ -57,10 +58,8 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public UserJPA getUserByUserName(String userName) {
-		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getUserName().equalsIgnoreCase(userName)).findFirst().orElse(null);
+		return userRepository.findByUserName(userName);
 	}
-	
 
 	@Override
 	public UserJPA getUserByFirstName(String firstName) {
@@ -74,7 +73,6 @@ public class UserServiceImp implements UserService {
 		return users.stream().filter(user -> user.getLastName().equalsIgnoreCase(lastName)).findFirst().orElse(null);
 	}
 
-
 	@Override
 	public Collection<UserJPA> getAll() {
 		Iterable<UserJPA> findAll = userRepository.findAll();
@@ -82,12 +80,12 @@ public class UserServiceImp implements UserService {
 		findAll.forEach(u -> users.add(u));
 		return users;
 	}
-	
+
 	@Override
 	public Collection<UserJPA> getAllByName(UserJPA user) {
 		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
 		List<UserJPA> match = new ArrayList<UserJPA>();
-		
+
 		return null;
 	}
 

@@ -45,7 +45,7 @@ public class UserServiceImpTest {
 	
 	@Test
 	public void getUserByNameTest(){
-		UserJPA userTemp = userServiceImp.getUserByUsername("MrTest");
+		UserJPA userTemp = userServiceImp.getUserByUserName("MrTest");
 		System.out.println(userTemp.toString());
 	}
 	@Test

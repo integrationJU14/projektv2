@@ -14,18 +14,13 @@ import se.arole.api.resource.User;
 
 public final class UserAdapter implements JsonSerializer<User>, JsonDeserializer<User> {
 
+	private final static JsonObjectMapper MAPPER = new JsonObjectMapper();
+	
 	// JsonSerializer
 	@Override
 	public JsonElement serialize(User user, Type typeOfSrc, JsonSerializationContext context) {
 
-		JsonObject json = new JsonObject();
-		json.addProperty("userId", user.getUserId());
-		json.addProperty("firstName", user.getFirstName());
-		json.addProperty("lastName", user.getLastName());
-		json.addProperty("userName", user.getUserName());
-		json.addProperty("isActive", user.isActive());
-
-		return json;
+		return MAPPER.userToJason(user);
 	}
 
 	// JsonDeserializer
@@ -33,19 +28,19 @@ public final class UserAdapter implements JsonSerializer<User>, JsonDeserializer
 	public User deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 
-		JsonObject userJson = json.getAsJsonObject();
-		Integer id = userJson.get("userId").getAsInt();
-		String userName = userJson.get("userName").getAsString();
-		String firstName = userJson.get("firstName").getAsString();
-		String lastName = userJson.get("lastName").getAsString();
+//		JsonObject userJson = json.getAsJsonObject();
+//		Integer id = userJson.get("userId").getAsInt();
+//		String userName = userJson.get("userName").getAsString();
+//		String firstName = userJson.get("firstName").getAsString();
+//		String lastName = userJson.get("lastName").getAsString();
+//
+//		boolean isActive;
+//
+//		if (userJson.get("isActive").getAsString().equals("true"))
+//			isActive = true;
+//		else
+//			isActive = false;
 
-		boolean isActive;
-
-		if (userJson.get("isActive").getAsString().equals("true"))
-			isActive = true;
-		else
-			isActive = false;
-
-		return new User(id, isActive, userName, firstName, lastName);
+		return MAPPER.jsonToUser(json);
 	}
 }

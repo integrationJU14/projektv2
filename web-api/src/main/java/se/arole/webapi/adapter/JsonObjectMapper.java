@@ -44,11 +44,12 @@ public class JsonObjectMapper {
 		json.addProperty("header", workItem.getHeader());
 
 		User assignedUser = workItem.getAssignedUser();
-
-		json.add("assignedUser", userToJason(assignedUser));
+		if (assignedUser != null) {
+			json.add("assignedUser", userToJason(assignedUser));
+		}
 
 		JsonArray assignedIssues = new JsonArray();
-		if (workItem.getAssignedIssues()!=null ) {
+		if (workItem.getAssignedIssues() != null) {
 			workItem.getAssignedIssues().forEach(issue -> {
 				assignedIssues.add(issueToJason(issue));
 			});
@@ -88,13 +89,13 @@ public class JsonObjectMapper {
 		issuesJson.forEach(e -> {
 			assignedIssues.add(jasonToIssue(e));
 		});
-		
+
 		JsonElement json2 = workItemJson.get("assignedUser");
 		if (json2 != null) {
 			User assignedUser = jsonToUser(json2);
 			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
 		}
-		
+
 		return new WorkItem(workItemId, description, status, header, assignedIssues);
 	}
 

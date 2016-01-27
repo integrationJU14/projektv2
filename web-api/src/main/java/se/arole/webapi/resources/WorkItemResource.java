@@ -22,8 +22,10 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import se.arole.api.controller.TeamController;
 import se.arole.api.controller.UserController;
 import se.arole.api.controller.WorkItemController;
+import se.arole.api.resource.Team;
 import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
 import se.arole.webapi.config.Config;
@@ -35,6 +37,7 @@ public class WorkItemResource {
 
 	private WorkItemController workItemController;
 	private UserController userController;
+	private TeamController teamController;
 
 	static {
 		context = new AnnotationConfigApplicationContext(Config.class);
@@ -51,11 +54,12 @@ public class WorkItemResource {
 	public WorkItemResource() {
 		workItemController = context.getBean(WorkItemController.class);
 		userController = context.getBean(UserController.class);
+		teamController = context.getBean(TeamController.class);
 	}
 
 	@GET
 	public Response getAllWorkItems(@QueryParam("status") String status, @QueryParam("userId") Integer userId,
-			@QueryParam("description") String description) {
+			@QueryParam("description") String description, @QueryParam("teamId") Integer teamId) {
 		Collection<WorkItem> workItems;
 
 		if (status != null) {
@@ -65,6 +69,9 @@ public class WorkItemResource {
 			workItems = workItemController.workItembyUser(user);
 		} else if (description != null) {
 			workItems = workItemController.workItemByDescription(description);
+		} else if (teamId != null) {
+			Team team = teamController.getTeam(teamId);
+			workItems = workItemController.workItemsByTeam(team);
 		} else {
 			workItems = workItemController.getAll();
 		}
