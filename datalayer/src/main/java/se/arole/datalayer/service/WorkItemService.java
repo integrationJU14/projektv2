@@ -11,11 +11,11 @@ public interface WorkItemService {
 
 	WorkItemJPA createWorkItem(WorkItemJPA workItem);
 
-	void changeStatusWorkItem(Status status, Integer workItemId);
+	void changeStatusWorkItem(String status, Integer workItemId);
 
 	void addWorkItemToUser(WorkItemJPA workItem, User user);
 
-	List<WorkItemJPA> workItemByStatus(Status status);
+	List<WorkItemJPA> workItemByStatus(String status);
 
 	List<WorkItemJPA> workItembyUser(User user);
 
@@ -23,4 +23,7 @@ public interface WorkItemService {
 
 	List<WorkItemJPA> workItemByDescription(String description);
 
+	List<WorkItemJPA> getAll();
+
+	WorkItemJPA findByItemId(int itemId);
 }
