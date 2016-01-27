@@ -40,7 +40,6 @@ public final class UserAdapter implements JsonSerializer<User>, JsonDeserializer
 		String lastName = userJson.get("lastName").getAsString();
 
 		boolean isActive = userJson.get("isActive").getAsString() != null;
-
 		return new User(id, isActive, userName, firstName, lastName);
 	}
 }

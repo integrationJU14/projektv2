@@ -10,49 +10,50 @@ import com.google.gson.JsonObject;
 import se.arole.api.resource.Issue;
 import se.arole.api.resource.User;
 import se.arole.api.resource.WorkItem;
+import se.arole.datalayer.entity.Status;
 
 public class JsonObjectMapper {
 
-	public JsonElement userToJason(User userVO) {
-
-		JsonObject jsonUser = new JsonObject();
-		jsonUser.addProperty("id", userVO.getUserId());
-		jsonUser.addProperty("username", userVO.getUserName());
-		jsonUser.addProperty("isActive", userVO.isActive());
-
-		return jsonUser;
-
+	public JsonElement userToJason(User user) {
+		JsonObject json = new JsonObject();
+		json.addProperty("userId", user.getUserId());
+		json.addProperty("firstName", user.getFirstName());
+		json.addProperty("lastName", user.getLastName());
+		json.addProperty("userName", user.getUserName());
+		json.addProperty("isActive", user.isActive());
+		return json;
 	}
 
-	public User jasonToUser(JsonElement json) {
-		return null;
+	public User jsonToUser(JsonElement json) {
+		JsonObject userJson = json.getAsJsonObject();
+		Integer id = userJson.get("userId").getAsInt();
+		String userName = userJson.get("userName").getAsString();
+		String firstName = userJson.get("firstName").getAsString();
+		String lastName = userJson.get("lastName").getAsString();
 
+		boolean isActive = userJson.get("isActive").getAsString() != null;
+
+		return new User(id, isActive, userName, firstName, lastName);
 	}
 
-	public JsonElement workItemVOToJson(WorkItem workItemVO) {
+	public JsonElement workItemVOToJson(WorkItem workItem) {
 
 		JsonObject json = new JsonObject();
-		json.addProperty("workItemId", workItemVO.getWorkItemId());
-		json.addProperty("description", workItemVO.getDescription());
-		json.addProperty("header", workItemVO.getHeader());
+		json.addProperty("workItemId", workItem.getWorkItemId());
+		json.addProperty("description", workItem.getDescription());
+		json.addProperty("header", workItem.getHeader());
 
-		User assignedUser = workItemVO.getAssignedUser();
+		User assignedUser = workItem.getAssignedUser();
 
 		json.add("assignedUser", userToJason(assignedUser));
 
-		JsonArray users = new JsonArray();
-		workItemVO.getUsers().forEach(user -> {
-			users.add(userToJason(user));
-		});
-
-		json.add("users", users);
-
 		JsonArray assignedIssues = new JsonArray();
-		workItemVO.getAssignedIssues().forEach(issue -> {
-			assignedIssues.add(issueToJason(issue));
-		});
-
-		json.add("users", users);
+		if (workItem.getAssignedIssues()!=null ) {
+			workItem.getAssignedIssues().forEach(issue -> {
+				assignedIssues.add(issueToJason(issue));
+			});
+		}
+		json.addProperty("status", workItem.getStatus().toString());
 
 		return json;
 
@@ -67,35 +68,38 @@ public class JsonObjectMapper {
 
 		return jsonIssue;
 	}
- 
-	public WorkItem jsonToWorkItemVO(JsonElement json) {
+
+	public WorkItem jsonToWorkItem(JsonElement json) {
 
 		JsonObject workItemJson = json.getAsJsonObject();
+
 		int workItemId = workItemJson.get("workItemId").getAsInt();
 		String description = workItemJson.get("description").getAsString();
 		String header = workItemJson.get("header").getAsString();
-		List<User> usersVO = new ArrayList<>();
+
+		JsonElement jsonElement = workItemJson.get("status");
+		Status status = Status.TO_DO;
+		if (jsonElement != null) {
+			status = Status.fromString(jsonElement.getAsString());
+		}
+
 		List<Issue> assignedIssues = new ArrayList<>();
-		User assignedUser = jasonToUser(workItemJson.get("assignedUser"));
-
-		JsonArray usersJson = workItemJson.get("users").getAsJsonArray();
-		usersJson.forEach(e -> {
-
-			User userVO = jasonToUser(e.getAsJsonObject());
-			usersVO.add(userVO);
-		});
-
 		JsonArray issuesJson = workItemJson.get("assignedIssues").getAsJsonArray();
 		issuesJson.forEach(e -> {
 			assignedIssues.add(jasonToIssue(e));
 		});
-
-		return new WorkItem(workItemId, description, header, assignedUser, usersVO, assignedIssues);
-
+		
+		JsonElement json2 = workItemJson.get("assignedUser");
+		if (json2 != null) {
+			User assignedUser = jsonToUser(json2);
+			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
+		}
+		
+		return new WorkItem(workItemId, description, status, header, assignedIssues);
 	}
 
 	public Issue jasonToIssue(JsonElement e) {
-		
+
 		JsonObject issueJson = e.getAsJsonObject();
 		int issueId = issueJson.get("issueId").getAsInt();
 		String description = issueJson.get("description").getAsString();

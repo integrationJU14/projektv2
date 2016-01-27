@@ -28,7 +28,7 @@ public class TeamAdapter implements JsonSerializer<Team>, JsonDeserializer<Team>
 
 		List<User> teamUsers = new ArrayList<>();
 		jsonObject.get("teamUsers").getAsJsonArray().forEach(tu -> {
-			teamUsers.add(JSON_MAPPER.jasonToUser(tu));
+			teamUsers.add(JSON_MAPPER.jsonToUser(tu));
 		});
 
 		return new Team(teamId, teamName, teamUsers);

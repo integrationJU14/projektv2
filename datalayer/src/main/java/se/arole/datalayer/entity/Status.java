@@ -28,6 +28,9 @@ public enum Status {
 				return s;
 			}
 		}
+		if (status.equals("") || status == null) {
+			return Status.TO_DO;
+		}
 		throw new IllegalArgumentException("No status with name " + status + " exists");
 	}
 }
