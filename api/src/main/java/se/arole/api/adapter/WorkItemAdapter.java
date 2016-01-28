@@ -14,7 +14,7 @@ import se.arole.datalayer.entity.WorkItemJPA;
 public class WorkItemAdapter {
 
 	public static WorkItemJPA toWorkItemDb(WorkItem workItem) {
-		// TODO status & issue ???
+		// TODO issue ???
 		Integer itemId = (int) workItem.getWorkItemId();
 		String description = workItem.getDescription();
 		String status = workItem.getStatus().toString();
@@ -27,18 +27,17 @@ public class WorkItemAdapter {
 	}
 
 	public static WorkItem fromWorkItemDb(WorkItemJPA workItemJPA) {
-		// TODO header & users & ussues ???
+		// TODO users & ussues ???
 		int workItemId = workItemJPA.getItemId();
 		String description = workItemJPA.getDescription();
-		String header = "";
 		Status status = Status.fromString(workItemJPA.getStatus());
 		List<Issue> assignedIssues = null;
 		User assignedUser = new User(0, false, "", "", "");
 		if (workItemJPA.getSolver() != null) {
 			assignedUser = UserAdapter.fromUserDb(workItemJPA.getSolver());
-			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
+			return new WorkItem(workItemId, description, status, assignedUser, assignedIssues);
 		}
-		return new WorkItem(workItemId, description, status, header, assignedIssues);
+		return new WorkItem(workItemId, description, status, assignedIssues);
 	}
 
 	public static List<WorkItemJPA> toDbWorkList(List<WorkItem> workItemVOList) {

@@ -41,8 +41,6 @@ public class JsonObjectMapper {
 		JsonObject json = new JsonObject();
 		json.addProperty("workItemId", workItem.getWorkItemId());
 		json.addProperty("description", workItem.getDescription());
-		json.addProperty("header", workItem.getHeader());
-
 		User assignedUser = workItem.getAssignedUser();
 		if (assignedUser != null) {
 			json.add("assignedUser", userToJason(assignedUser));
@@ -76,7 +74,6 @@ public class JsonObjectMapper {
 
 		int workItemId = workItemJson.get("workItemId").getAsInt();
 		String description = workItemJson.get("description").getAsString();
-		String header = workItemJson.get("header").getAsString();
 
 		JsonElement jsonElement = workItemJson.get("status");
 		Status status = Status.TO_DO;
@@ -93,10 +90,10 @@ public class JsonObjectMapper {
 		JsonElement json2 = workItemJson.get("assignedUser");
 		if (json2 != null) {
 			User assignedUser = jsonToUser(json2);
-			return new WorkItem(workItemId, description, status, header, assignedUser, assignedIssues);
+			return new WorkItem(workItemId, description, status, assignedUser, assignedIssues);
 		}
 
-		return new WorkItem(workItemId, description, status, header, assignedIssues);
+		return new WorkItem(workItemId, description, status, assignedIssues);
 	}
 
 	public Issue jasonToIssue(JsonElement e) {

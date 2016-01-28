@@ -2,7 +2,6 @@ package se.arole.datalayer.service;
 
 import java.util.List;
 
-import se.arole.datalayer.entity.Status;
 import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
