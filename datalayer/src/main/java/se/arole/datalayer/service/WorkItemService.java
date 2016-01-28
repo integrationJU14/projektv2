@@ -29,4 +29,6 @@ public interface WorkItemService {
 	WorkItemJPA findByItemId(int itemId);
 
 	void deleteWorkItem(Integer itemId);
+
+	List<WorkItemJPA> getAllWithIssues();
 }

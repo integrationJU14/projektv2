@@ -89,4 +89,17 @@ public class WorkItemServiceImpl implements WorkItemService {
 		WorkItemJPA findByItemId = findByItemId(itemId);
 		repository.delete(findByItemId);
 	}
+
+	@Override
+	public List<WorkItemJPA> getAllWithIssues() {
+		List<WorkItemJPA> workItems = new ArrayList<>();
+
+		for (WorkItemJPA workItem : repository.findAll()) {
+			if (!workItem.getIssue().isEmpty()) {
+				workItems.add(workItem);
+			}
+		}
+
+		return workItems;
+	}
 }

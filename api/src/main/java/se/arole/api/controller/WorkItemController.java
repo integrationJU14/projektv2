@@ -98,4 +98,8 @@ public class WorkItemController {
 		workItemService.deleteWorkItem(id);
 	}
 
+	public List<WorkItem> getAllWithIssues() {
+		return WorkItemAdapter.fromDbWorkList(workItemService.getAllWithIssues());
+	}
+
 }

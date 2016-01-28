@@ -2,6 +2,7 @@ package se.arole.webapi.resources;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -77,6 +78,14 @@ public class WorkItemResource {
 		}
 
 		GenericEntity<Collection<WorkItem>> result = new GenericEntity<Collection<WorkItem>>(workItems) {
+		};
+		return Response.ok(result).build();
+	}
+	@GET
+	@Path("/issue")
+	public Response withIssues(){
+		List<WorkItem> allWithIssues = workItemController.getAllWithIssues();
+		GenericEntity<Collection<WorkItem>> result = new GenericEntity<Collection<WorkItem>>(allWithIssues) {
 		};
 		return Response.ok(result).build();
 	}

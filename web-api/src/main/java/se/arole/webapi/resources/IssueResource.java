@@ -73,17 +73,15 @@ public final class IssueResource {
 		return Response.noContent().build();
 	}
 
-	//
-	//// @PUT
-	//// @Path("{id}")
-	//// public Response updateIssue(@PathParam("id") Integer id, Issue Issue) {
-	////
-	//// IssueController.getIssue(id);
-	//// Issue updatedIssue = IssueController.update(id, Issue);
-	////
-	//// return Response.ok(updatedIssue).build();
-	//// }
-	//
+	@PUT
+	@Path("{id}")
+	public Response updateIssue(@PathParam("id") Integer id, Issue saveMe) {
+
+		Issue updatedIssue = issueController.update(id, saveMe);
+
+		return Response.ok(updatedIssue).build();
+	}
+
 	@GET
 	@Path("{id}")
 	public Response getIssue(@PathParam("id") Integer id) {

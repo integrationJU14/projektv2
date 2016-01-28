@@ -43,18 +43,13 @@ public class IssueServiceImpl implements IssueService {
 	@Override
 	public List<WorkItemJPA> workItemsWithIssues() {
 		List<WorkItemJPA> workItems = new ArrayList<>();
-		for(WorkItemJPA workItem :workItemRepository.findAll()){
+
+		for (WorkItemJPA workItem : workItemRepository.findAll()) {
 			if (!workItem.getIssue().isEmpty()) {
 				workItems.add(workItem);
 			}
 		}
-		
-//		for (IssueJPA issue : issueRepository.findAll()) {
-//			if (issue.getWorkItem() != null) {
-//				WorkItemJPA workItem = issue.getWorkItem();
-//				workItems.add(workItem);
-//			}
-//		}
+
 		return workItems;
 	}
 
@@ -63,11 +58,9 @@ public class IssueServiceImpl implements IssueService {
 		IssueJPA addMe = issueRepository.findByIssueId(issueId);
 		WorkItemJPA updateMe = workItemRepository.findByItemId(workId);
 
-//		issueToUpdate.setWorkItem(addMe);
 		updateMe.addIssue(addMe);
-		
+
 		workItemRepository.save(updateMe);
-//		issueRepository.save(issueToUpdate);
 	}
 
 	@Override
