@@ -85,16 +85,17 @@ public class TeamResource {
 	@POST
 	@Path("{id}/add_user")
 	@Consumes(MediaType.TEXT_PLAIN)
-	public Response addUser(@PathParam("id") Integer teamId, @QueryParam("userId")Integer userId) {
+	public Response addUser(@PathParam("id") Integer teamId, @QueryParam("userId") Integer userId) {
 		teamController.addUser(teamId, userId);
 		Team team = teamController.getTeam(teamId);
 		return Response.ok(team).build();
 	}
+
 	@DELETE
 	@Path("{id}")
 	public Response deleteTeam(@PathParam("id") Integer teamId) {
 		teamController.deleteTeam(teamId);
-		
-		return Response.ok("deleted "+teamId).build();
+
+		return Response.status(Status.NO_CONTENT).build();
 	}
 }

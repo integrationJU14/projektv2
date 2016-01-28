@@ -11,7 +11,6 @@ import se.arole.datalayer.entity.TeamJPA;
 import se.arole.datalayer.entity.UserJPA;
 import se.arole.datalayer.service.TeamService;
 import se.arole.datalayer.service.UserService;
-import se.arole.datalayer.serviceImp.TeamServiceImpl;
 
 public class TeamController {
 
@@ -21,7 +20,7 @@ public class TeamController {
 	private UserService userService;
 
 	public TeamController(TeamService teamService) {
-		this.teamService=teamService;
+		this.teamService = teamService;
 	}
 
 	public List<Team> getAll() {
@@ -54,6 +53,6 @@ public class TeamController {
 
 	public void deleteTeam(Integer teamId) {
 		teamService.deleteTeam(teamId);
-		
+
 	}
 }
