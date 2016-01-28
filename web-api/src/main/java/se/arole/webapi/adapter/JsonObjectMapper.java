@@ -65,7 +65,7 @@ public class JsonObjectMapper {
 		jsonIssue.addProperty("issueId", issue.getIssueId());
 		jsonIssue.addProperty("description", issue.getDescription());
 		jsonIssue.addProperty("header", issue.getHeader());
-		jsonIssue.addProperty("isSolved", issue.isSolved());
+		jsonIssue.addProperty("solved", issue.isSolved());
 
 		return jsonIssue;
 	}
@@ -106,7 +106,7 @@ public class JsonObjectMapper {
 		String description = issueJson.get("description").getAsString();
 		String header = issueJson.get("header").getAsString();
 
-		boolean isSolved = issueJson.get("isSolved").getAsBoolean();
+		boolean isSolved = issueJson.get("solved").getAsBoolean();
 
 		return new Issue(issueId, description, header, isSolved);
 	}
