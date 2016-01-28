@@ -20,7 +20,7 @@ public class JsonObjectMapper {
 		json.addProperty("firstName", user.getFirstName());
 		json.addProperty("lastName", user.getLastName());
 		json.addProperty("userName", user.getUserName());
-		json.addProperty("isActive", user.isActive());
+		json.addProperty("active", user.isActive());
 		return json;
 	}
 
@@ -31,7 +31,7 @@ public class JsonObjectMapper {
 		String firstName = userJson.get("firstName").getAsString();
 		String lastName = userJson.get("lastName").getAsString();
 
-		boolean isActive = userJson.get("isActive").getAsString() != null;
+		boolean isActive = userJson.get("active").getAsString() != null;
 
 		return new User(id, isActive, userName, firstName, lastName);
 	}
@@ -65,7 +65,7 @@ public class JsonObjectMapper {
 		jsonIssue.addProperty("issueId", issue.getIssueId());
 		jsonIssue.addProperty("description", issue.getDescription());
 		jsonIssue.addProperty("header", issue.getHeader());
-		jsonIssue.addProperty("isSolved", issue.isSolved());
+		jsonIssue.addProperty("solved", issue.isSolved());
 
 		return jsonIssue;
 	}
@@ -106,7 +106,7 @@ public class JsonObjectMapper {
 		String description = issueJson.get("description").getAsString();
 		String header = issueJson.get("header").getAsString();
 
-		boolean isSolved = issueJson.get("isSolved").getAsBoolean();
+		boolean isSolved = issueJson.get("solved").getAsBoolean();
 
 		return new Issue(issueId, description, header, isSolved);
 	}

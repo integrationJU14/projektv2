@@ -18,7 +18,7 @@ public class User {
 		
 	}
 
-	public long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
