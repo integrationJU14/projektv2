@@ -1,11 +1,7 @@
 package se.arole.api.controller;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import se.arole.api.adapter.UserAdapter;
 import se.arole.api.resource.User;
@@ -51,20 +47,19 @@ public final class UserController {
 
 	public User getUserByUserName(String userName) {
 		UserJPA userByUsername = userService.getUserByUserName(userName);
-
 		return UserAdapter.fromUserDb(userByUsername);
 	}
 	
-	public User getUserByFirstName(String firstName) {
-		UserJPA userByFirstname = userService.getUserByUserName(firstName);
+	public List<User> getUserByFirstName(String firstName) {
+		List<UserJPA> usersByFirstname = userService.getUserByFirstName(firstName);
 
-		return UserAdapter.fromUserDb(userByFirstname);
+		return UserAdapter.fromDbUserList(usersByFirstname);
 	}
 	
-	public User getUserByLastName(String lastName) {
-		UserJPA userByLastname = userService.getUserByLastName(lastName);
+	public List<User> getUserByLastName(String lastName) {
+		List<UserJPA> userByLastname = userService.getUserByLastName(lastName);
 
-		return UserAdapter.fromUserDb(userByLastname);
+		return UserAdapter.fromDbUserList(userByLastname);
 	}
 
 }

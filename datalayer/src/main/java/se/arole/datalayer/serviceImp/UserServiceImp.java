@@ -2,7 +2,7 @@ package se.arole.datalayer.serviceImp;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +62,13 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public UserJPA getUserByFirstName(String firstName) {
-		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getFirstName().equalsIgnoreCase(firstName)).findFirst().orElse(null);
+	public List<UserJPA> getUserByFirstName(String firstName) {
+		return userRepository.findAllByFirstName(firstName);
 	}
 
 	@Override
-	public UserJPA getUserByLastName(String lastName) {
-		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		return users.stream().filter(user -> user.getLastName().equalsIgnoreCase(lastName)).findFirst().orElse(null);
+	public List<UserJPA> getUserByLastName(String lastName) {
+		return userRepository.findAllByLastName(lastName);
 	}
 
 	@Override
@@ -83,10 +81,8 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public Collection<UserJPA> getAllByName(UserJPA user) {
-		List<UserJPA> users = (List<UserJPA>) userRepository.findAll();
-		List<UserJPA> match = new ArrayList<UserJPA>();
 
-		return null;
+		return Collections.emptyList();
 	}
 
 }

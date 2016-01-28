@@ -1,6 +1,7 @@
 package se.arole.datalayer.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import se.arole.datalayer.entity.UserJPA;
 
@@ -11,8 +12,8 @@ public interface UserService {
 	void changeStatusUser (boolean isActive, Integer userId);
 	UserJPA getUser (Integer userId);
 	UserJPA getUserByUserName (String userName);
-	UserJPA getUserByFirstName (String firstName);
-	UserJPA getUserByLastName (String lastName);
+	List<UserJPA> getUserByFirstName (String firstName);
+	List<UserJPA> getUserByLastName (String lastName);
 
 	Collection<UserJPA> getAll();
 	Collection<UserJPA> getAllByName(UserJPA user);

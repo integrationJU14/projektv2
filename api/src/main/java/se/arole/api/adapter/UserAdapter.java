@@ -29,7 +29,6 @@ public class UserAdapter {
 	}
 
 	public static List<UserJPA> toDbUserList(List<User> userList) {
-
 		List<UserJPA> userListToDb = new ArrayList<UserJPA>();
 		userList.forEach(u -> {
 			userListToDb.add(toUserDb(u));
