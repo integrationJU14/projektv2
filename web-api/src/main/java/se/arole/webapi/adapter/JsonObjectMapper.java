@@ -31,7 +31,7 @@ public class JsonObjectMapper {
 		String firstName = userJson.get("firstName").getAsString();
 		String lastName = userJson.get("lastName").getAsString();
 
-		boolean isActive = userJson.get("active").getAsString() != null;
+		boolean isActive = Boolean.getBoolean(userJson.get("active").getAsString());
 
 		return new User(id, isActive, userName, firstName, lastName);
 	}
