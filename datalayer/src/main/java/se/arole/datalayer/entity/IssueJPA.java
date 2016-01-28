@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 @Entity
 public class IssueJPA implements Serializable {
 
@@ -17,13 +18,14 @@ public class IssueJPA implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(unique=true)
-	Integer issueId;
-	String description, header;
+	@Column(unique = true)
+	private Integer issueId;
+	private String description;
+	private String header;
 	boolean isSolved;
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_workItem_id")
-	WorkItemJPA workItemJPA;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//	@JoinColumn(name = "fk_workItem_id")
+//	private WorkItemJPA workItemJPA;
 
 	public IssueJPA() {
 
@@ -32,8 +34,8 @@ public class IssueJPA implements Serializable {
 	public IssueJPA(Integer issueId, String description, String header, boolean isSolved) {
 		super();
 		this.issueId = issueId;
-		this.description=description;
-		this.header=header;
+		this.description = description;
+		this.header = header;
 		this.isSolved = isSolved;
 	}
 
@@ -61,19 +63,19 @@ public class IssueJPA implements Serializable {
 		this.description = message;
 	}
 
-	public WorkItemJPA getWorkItem() {
-		return workItemJPA;
-	}
-
-	public void setWorkItem(WorkItemJPA workItemJPA) {
-		this.workItemJPA = workItemJPA;
-	}
+//	public WorkItemJPA getWorkItem() {
+//		return workItemJPA;
+//	}
+//
+//	public void setWorkItem(WorkItemJPA workItemJPA) {
+//		this.workItemJPA = workItemJPA;
+//	}
 
 	public String getHeader() {
 		// TODO Auto-generated method stub
 		return header;
 	}
-	
+
 	public void setHeader(String header) {
 		this.header = header;
 	}

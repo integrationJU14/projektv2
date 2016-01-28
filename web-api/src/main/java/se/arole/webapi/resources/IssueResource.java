@@ -6,9 +6,11 @@ import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -17,8 +19,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.google.gson.JsonObject;
 
 import se.arole.api.controller.IssueController;
 import se.arole.api.resource.Issue;
@@ -33,7 +33,6 @@ public final class IssueResource {
 		SPRINGCONTEXT = new AnnotationConfigApplicationContext(Config.class);
 	}
 
-	// @Autowired
 	private IssueController issueController;
 
 	@Context
@@ -65,6 +64,15 @@ public final class IssueResource {
 		return Response.created(location).build();
 	}
 
+	@PUT
+	@Path("{id}/work")
+	public Response addToWorkItem(@PathParam("id") Integer id, @QueryParam("workId") Integer workId) {
+
+		issueController.addIssueToWorkItem(workId, id);
+
+		return Response.noContent().build();
+	}
+
 	//
 	//// @PUT
 	//// @Path("{id}")
@@ -79,18 +87,10 @@ public final class IssueResource {
 	@GET
 	@Path("{id}")
 	public Response getIssue(@PathParam("id") Integer id) {
-		Issue Issue = issueController.getIssue(id);
+		Issue issue = issueController.getIssue(id);
 
-		return Response.ok(Issue).build();
+		System.out.println(issue.toString());
+		return Response.ok(issue).build();
 	}
-
-	// @GET
-	// @QueryParam("{IssueName}")
-	// public Response getIssue(@QueryParam("IssueName") String IssueName) {
-	// Issue Issue = IssueController.getIssue(IssueName);
-	// // TODO: POssibility to add a mapper for an exception if no customer is
-	// // found
-	// return Response.ok(Issue).build();
-	// }
 
 }

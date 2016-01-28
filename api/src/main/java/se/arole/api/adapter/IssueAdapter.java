@@ -22,7 +22,7 @@ public class IssueAdapter {
 
 		Integer issueId = issueDb.getIssueId();
 		String issueDescription = issueDb.getDescription();
-		String issueHeader = null;
+		String issueHeader = issueDb.getHeader();
 		boolean isSolved = issueDb.isSolved();
 
 		return new Issue(issueId, issueDescription, issueHeader, isSolved);

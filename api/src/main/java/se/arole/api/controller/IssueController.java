@@ -2,19 +2,16 @@ package se.arole.api.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import se.arole.api.adapter.IssueAdapter;
-import se.arole.api.adapter.UserAdapter;
 import se.arole.api.resource.Issue;
 import se.arole.api.resource.WorkItem;
 import se.arole.datalayer.entity.IssueJPA;
 import se.arole.datalayer.entity.WorkItemJPA;
 import se.arole.datalayer.service.IssueService;
-import se.arole.datalayer.serviceImp.TeamServiceImpl;
 
 public final class IssueController {
 
@@ -26,18 +23,18 @@ public final class IssueController {
 	}
 
 	public Collection<Issue> getAll() {
-		
+
 		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
 		List<IssueJPA> issueListTemp = new ArrayList<IssueJPA>();
-		
-		for(WorkItemJPA workItem : workItemList){
-			
+
+		for (WorkItemJPA workItem : workItemList) {
+
 			issueListTemp.addAll(workItem.getIssue());
-			
+
 		}
-		
+
 		List<Issue> issueList = IssueAdapter.fromDbIssueList(issueListTemp);
-		
+
 		return issueList;
 	}
 
@@ -55,47 +52,29 @@ public final class IssueController {
 		return IssueAdapter.fromIssueDb(updatedIssue);
 	}
 
-	public List<WorkItemJPA> workItemsWithIssues(){
-		
+	public List<WorkItemJPA> workItemsWithIssues() {
+
 		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
 		List<Issue> issueList = new ArrayList<Issue>();
-		
-		//does this work?
-		for(WorkItemJPA workItem : workItemList){
-			
-			if(workItem.getIssue().isEmpty())
+
+		// does this work?
+		for (WorkItemJPA workItem : workItemList) {
+
+			if (workItem.getIssue().isEmpty())
 				workItemList.remove(workItem);
-			
+
 		}
-		
+
 		return workItemList;
 	}
 
-	public void addIssueToWorkItem(WorkItemJPA workItem, IssueJPA issue) {
-
-		List<IssueJPA> issueList = workItem.getIssue();
-
-		issueList.add(issue);
-
-		workItem.setIssue(issueList);
+	public void addIssueToWorkItem(Integer workId, Integer issueId) {
+		issueService.addIssueToWorkItem(workId, issueId);
 	}
 
 	public Issue getIssue(Integer id) {
-		List<WorkItemJPA> workItemList = issueService.workItemsWithIssues();
-		List<IssueJPA> issueList = new ArrayList<IssueJPA>();
-
-		for (WorkItemJPA workItem : workItemList) {
-
-			for (IssueJPA issue : workItem.getIssue()) {
-
-				if (id == issue.getIssueId())
-					return IssueAdapter.fromIssueDb(issue);
-
-			}
-
-		}
-		// fix later
-		return null;
+		IssueJPA issue = issueService.getIssue(id);
+		return IssueAdapter.fromIssueDb(issue);
 	}
 	/*
 	 * public IssueVO getIssue(String issueName) { Issue issueByIssuename =

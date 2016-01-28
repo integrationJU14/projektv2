@@ -12,6 +12,8 @@ public interface IssueService {
 
 	List<WorkItemJPA> workItemsWithIssues();
 
-	void addIssueToWorkItem(WorkItemJPA workItemJPA, IssueJPA issue);
+	void addIssueToWorkItem(Integer workId, Integer issueId);
+
+	IssueJPA getIssue(Integer id);
 
 }

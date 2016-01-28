@@ -96,4 +96,8 @@ public class WorkItemJPA implements Serializable {
 		this.issue = issue;
 	}
 
+	public void addIssue(IssueJPA issueToUpdate) {
+		issue.add(issueToUpdate);
+	}
+
 }
