@@ -95,6 +95,6 @@ public class TeamResource {
 	public Response deleteTeam(@PathParam("id") Integer teamId) {
 		teamController.deleteTeam(teamId);
 		
-		return Response.ok(Status.OK).build();
+		return Response.ok("deleted "+teamId).build();
 	}
 }
